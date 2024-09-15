@@ -1,0 +1,133 @@
+* {
+    overflow: hidden;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-image: url(../imagens/background.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+main {
+    width: 450px;
+    height: 600px;
+    border-radius: 10px;
+    box-shadow: 0 0 30px black;
+    background-color: white;
+}
+
+@media screen and (min-width: 1920px) {
+    main {
+        width: 525px;
+        height: 700px;
+    }
+}
+
+.div-logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 12%;
+    margin-bottom: 8%;
+    height: 100px;
+}
+
+@media screen and (min-width: 1920px) {
+    .div-logo {
+        margin-bottom: 10%;
+    }
+}
+
+img {
+    height: 125px;
+}
+
+@media screen and (min-width: 1920px) {
+    img {
+        height: 150px;
+    }
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+label {
+    display: block;
+    align-self: flex-start;
+    margin-left: 11%;
+    font-size: 20px;
+}
+
+@media screen and (min-width: 1920px) {
+    label {
+        font-size: 25px;
+    }
+}
+
+
+input {
+    margin-top: 5px;
+    margin-bottom: 25px;
+    height: 25px;
+    border-radius: 5px;
+    border-width: 1px;
+    font-size: 16px;
+}
+
+@media screen and (min-width: 1920px) {
+    input {
+        margin-bottom: 35px;
+        width: 400px;
+        height: 35px;
+        font-size: 18px;
+    }
+}
+
+select {
+    align-self: flex-start;
+    margin-top: 5px;
+    margin-left: 11%;
+    width: 100px;
+    font-size: 15px;
+}
+
+@media screen and (min-width: 1920px) {
+    select {
+        font-size: 20px;
+        width: 150px;
+    }
+}
+
+.button {
+    margin-top: 18%;
+}
+
+.button input {
+    width: 350px;
+    height: 40px;
+    background-color: #347675;
+    color: white;
+    font-size: 25px;
+}
+
+@media screen and (min-width: 1920px) {
+    .button input {
+        width: 405px;
+        height: 50px;
+        font-size: 30px;
+    }
+}
+
+.button input:hover {
+    background-color: #3f8f8d;
+    cursor: pointer;
+}
