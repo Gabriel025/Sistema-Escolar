@@ -23,7 +23,7 @@ main {
 
 @media screen and (min-width: 1920px) {
     main {
-        width: 525px;
+        width: 500px;
         height: 700px;
     }
 }
@@ -62,21 +62,20 @@ form {
 
 label {
     display: block;
-    align-self: flex-start;
-    margin-left: 11%;
-    font-size: 22px;
+    width: 350px;
+    font-size: 20px;
 }
 
 @media screen and (min-width: 1920px) {
     label {
-        font-size: 25px;
+        width: 400px;
+        font-size: 22px;
     }
 }
 
-
 input {
-    margin-top: 5px;
-    margin-bottom: 25px;
+    margin-top: 4px;
+    margin-bottom: 20px;
     height: 30px;
     border-radius: 5px;
     border-width: 1px;
@@ -85,15 +84,25 @@ input {
 
 @media screen and (min-width: 1920px) {
     input {
-        margin-bottom: 35px;
+        margin-bottom: 25px;
         width: 400px;
         height: 35px;
         font-size: 18px;
     }
 }
 
-.button {
-    margin-top: 12%;
+.div-error {
+    margin-top: -20px;
+    margin-bottom: 16%;
+    height: 35px;
+    color: rgb(66, 66, 66);
+}
+
+@media screen and (min-width: 1920px) {
+    .div-error {
+        height: 55px;
+        font-size: 20px;
+    }
 }
 
 .button input {
