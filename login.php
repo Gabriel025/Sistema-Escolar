@@ -2,17 +2,31 @@
 
 include 'conexao.php';
 
+$mysqli = new mysqli("localhost","root","","sistema_academico");
 $error = false;
 
 if(isset($_POST ["txt-usuario"]) != '') {
   $usuario = $_POST ["txt-usuario"];
   $senha = $_POST ["txt-senha"];
 
-  $sql = mysql_query("SELECT * FROM tb_usuarios WHERE usuario = '$usuario' AND senha = '$senha'");
+  $sql = $mysqli -> query("SELECT * FROM tb_usuarios WHERE usuario = '$usuario' AND senha = '$senha'");
 
-	if (mysql_num_rows($sql) > 0) {
-    header("Location: alunos/aluno.html");
-    exit();
+	if (mysqli_num_rows($sql) > 0) {
+    $aluno = $mysqli -> query("SELECT * FROM tb_usuarios WHERE usuario = '$usuario' AND cargo = 'aluno'");
+    $professor = $mysqli -> query("SELECT * FROM tb_usuarios WHERE usuario = '$usuario' AND cargo = 'professor'");
+
+    if(mysqli_num_rows($aluno) > 0) {
+      header("Location: alunos/aluno-sidebar.html");
+      exit();
+    }
+    else if(mysqli_num_rows($professor) > 0) {
+      header("Location: professores/professor-sidebar.html");
+      exit();
+    }
+    else {
+      header("Location: secretaria/secretaria-sidebar.html");
+      exit();
+    }
   }
 
   else {
