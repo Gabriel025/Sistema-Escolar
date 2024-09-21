@@ -2,11 +2,17 @@
     overflow: hidden;
 }
 
+html {
+    line-height: 1.15; /* 1 */
+    -webkit-text-size-adjust: 100%; /* 2 */
+}
+
 body {
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
+    margin: 0;
     background-image: url(../imagens/background.png);
     background-position: center;
     background-repeat: no-repeat;
@@ -77,6 +83,7 @@ input {
     margin-top: 4px;
     margin-bottom: 20px;
     height: 30px;
+    width: 345px;
     border-radius: 5px;
     border-width: 1px;
     font-size: 16px;
@@ -89,7 +96,13 @@ input {
         height: 35px;
         font-size: 18px;
     }
+} 
+
+.input-erro {
+    border: 1px solid red;
+    outline-color: red;
 }
+
 
 .div-error {
     margin-top: -20px;
