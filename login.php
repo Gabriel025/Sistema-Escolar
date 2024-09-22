@@ -87,7 +87,7 @@ if(isset($_POST ["txt-usuario"]) != '') {
         <input type="submit" value="Entrar">
       </div>
     </form>
-    <center><a href="">Esqueçeu a senha?</a></center>
+    <center><a href="recuperar-senha.html">Esqueçeu a senha?</a></center>
   </main>
 </body>
 </html>

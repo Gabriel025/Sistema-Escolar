@@ -143,3 +143,63 @@ input {
         font-size: 20px;
     }
 }
+
+/* TELA DE RECUPERAÇÂO DE SENHA */
+
+.main-small {
+    height: 400px;
+}
+
+@media screen and (min-width: 1920px) {
+    .main-small {
+        height: 450px;
+    }
+
+    .main-small p {
+        font-size: 20px;
+    }
+}
+
+.div-logo-small {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 12%;
+    margin-bottom: 8%;
+    height: 70px;
+}
+
+.div-logo-small img {
+    height: 100px;
+}
+
+.button-small button {
+    width: 125px;
+    height: 50px;
+    background-color: #581663;
+    border-radius: 5px;
+    font-size: 25px;
+}
+
+.button-small a {
+    color: white;
+    text-decoration: none;
+}
+
+@media screen and (min-width: 1920px) {
+    .button-small a {
+        font-size: 25px;
+    }
+}
+
+.button-small input {
+    width: 125px;
+    height: 50px;
+    background-color: #581663;
+    color: white;
+    font-size: 25px;
+}
+
+.button-small input:hover {
+   cursor: pointer;
+}
