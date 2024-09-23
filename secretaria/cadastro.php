@@ -1,47 +1,9 @@
-<?php  
-  // Conectando com o banco de dados.
-  $mysqli = new mysqli("localhost","root","","sistema_academico");
+<?php
+// Conectando ao banco de dados
+$mysqli = new mysqli("localhost","root","","sistema_academico");
+session_start(); // Para salvar o nome do úsuario que está logando
 
-  // Iniciando uma sessão, para salvar temporariamente o ultimo úsuario (aluno) criado, possibilitando editar a coluna turma dele..
-  session_start();
-
-  $error = false;
-  $usuario_error = false;
-
-  if(isset($_POST ["txt-usuario"]) != '') {
-    // Declarando Variáveis.
-    $usuario = $_POST ["txt-usuario"];
-    $senha = $_POST ["txt-senha"];
-    $nome = $_POST ["txt-nome"];
-    $divisao = $_POST ["txt-divisao"];
-    
-    $sql = $mysqli -> query("SELECT * FROM tb_usuarios WHERE usuario = '$usuario'");
-
-    if ("$usuario" == "$senha") {
-        $usuario_error = true;
-    }
-
-    if (mysqli_num_rows($sql) > 0) {  
-        $error = true;
-    }
-    else {
-        if ($divisao == "aluno" && $error == false && $usuario_error == false) {
-          $_SESSION['usuario-valor'] = $usuario;
-          $mysqli -> query ("INSERT INTO tb_usuarios VALUES ('$usuario','$senha','$divisao')");
-          $mysqli -> query ("INSERT INTO tb_aluno VALUES ('$usuario','$nome','')");
-          header("Location: cadastro-turma.php");
-          exit();
-        }
-        else if($divisao == "professor" && $error == false && $usuario_error == false) {
-          $mysqli -> query ("INSERT INTO tb_usuarios VALUES ('$usuario','$senha','$divisao')");
-          $mysqli -> query ("INSERT INTO tb_professor VALUES ('$usuario','$nome','')");
-        }
-        else if($divisao == "secretaria" && $error == false && $usuario_error == false) {
-          $mysqli -> query ("INSERT INTO tb_usuarios VALUES ('$usuario','$senha','$divisao')");
-          $mysqli -> query ("INSERT INTO tb_secretaria VALUES ('$usuario','$nome','')");
-        }
-    }
-  }
+$usuario = $_SESSION['usuario-nome'];
 ?>
 
 <!DOCTYPE html>
@@ -49,7 +11,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Novo usuário</title>
+  <title>Document</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="../estilos/style.css">
   <link rel="stylesheet" href="../estilos/cadastro.css">
   <!-- FONTS -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -58,61 +22,134 @@
 </head>
 <body>
   <main>
-    <div class="div-logo">
-      <img src="../imagens/logo.png" alt="Logo" class="logo">
-    </div>
-    <form name="form_cadastro" method="post">
-      <label>Nome Completo</label>
-      <input type="text" name="txt-nome" value="" size="35" maxlength="50" required="yes">
-
-      <label>Usuário</label>
-      <?php 
-          if($error == false && $usuario_error == false) {
-            echo '<input type="text" name="txt-usuario" value="" size="35" maxlength="30" required="yes">';
-          }
-          else {
-            echo '<input type="text" name="txt-usuario" value="" size="35" maxlength="30" required="yes" class="input-erro">';
-          }
-      ?>
-  
-      <label>Senha</label>
-      <?php 
-          // Dependendo se houver um erro ou não, isso vai mudar a cor da borda do input.
-          if($usuario_error == false) {
-            echo '<input type="password" name="txt-senha" value="" size="35" maxlength="30" required="yes">';
-          }
-          else if($error == true) {
-            echo '<input type="password" name="txt-senha" value="" size="35" maxlength="30" required="yes">';
-          }
-          else {
-            echo '<input type="password" name="txt-senha" value="" size="35" maxlength="30" required="yes" class="input-erro">';
-          }
-      ?>
-
-      <label>Função</label>
-      <div class="div-select">
-        <select name="txt-divisao">
-          <option value="aluno">Aluno</option>
-          <option value="professor">Professor</option>
-          <option value="secretaria">Secretaria</option>
-        </select>
+    <div class="content">
+      <div class="div-logo">
+        <img src="../imagens/logo.png" alt="Logo" class="logo">
       </div>
+      <form name="form_cadastro" method="post">
+        <label>Nome Completo</label>
+        <input type="text" name="txt-nome" value="" size="35" maxlength="50" required="yes">
 
-      <div class="div-error">
+        <label>Usuário</label>
         <?php 
-          if($error == true) {
-            echo "<p> Esse usuário já existe </p>";
-          }
-          else if($usuario_error == true) {
-            echo "<p> O usuário e a senha não podem ser iguais </p>";
-          }
+            if($error == false && $usuario_error == false) {
+              echo '<input type="text" name="txt-usuario" value="" size="35" maxlength="30" required="yes">';
+            }
+            else {
+              echo '<input type="text" name="txt-usuario" value="" size="35" maxlength="30" required="yes" class="input-erro">';
+            }
         ?>
-      </div>
+    
+        <label>Senha</label>
+        <?php 
+            // Dependendo se houver um erro ou não, isso vai mudar a cor da borda do input.
+            if($usuario_error == false) {
+              echo '<input type="password" name="txt-senha" value="" size="35" maxlength="30" required="yes">';
+            }
+            else if($error == true) {
+              echo '<input type="password" name="txt-senha" value="" size="35" maxlength="30" required="yes">';
+            }
+            else {
+              echo '<input type="password" name="txt-senha" value="" size="35" maxlength="30" required="yes" class="input-erro">';
+            }
+        ?>
 
-      <div class="button">
-        <input type="submit" value="Cadastrar">
-      </div>
-    </form>
+        <label>Função</label>
+        <div class="div-select">
+          <select name="txt-divisao">
+            <option value="aluno">Aluno</option>
+            <option value="professor">Professor</option>
+            <option value="secretaria">Secretaria</option>
+          </select>
+        </div>
+
+        <div class="div-error">
+          <?php 
+            if($error == true) {
+              echo "<p> Esse usuário já existe </p>";
+            }
+            else if($usuario_error == true) {
+              echo "<p> O usuário e a senha não podem ser iguais </p>";
+            }
+          ?>
+        </div>
+
+        <div class="button">
+          <input type="submit" value="Cadastrar">
+        </div>
+      </form>
+    </div>
   </main>
+  <nav class="sidebar">
+    <div class="sidebar-content">
+      <div class="user">
+        <img src="../imagens/perfil_vazio.png" class="user-avatar" alt="Avatar">
+        
+        <p class="user-infos">
+          <span class="item-description">
+            <?php
+              echo "Usuário: {$usuario}";
+            ?>
+          </span>
+        </p>
+      </div>
+  
+      <ul class="side-items">
+        <li class="side-item">
+          <a href="aluno-avisos.php" target="_parent">
+            <i class="fa-solid fa-house"></i>
+            <span class="item-description">
+              Avisos
+            </span>
+          </a>
+        </li>
+  
+        <li class="side-item">
+          <a href="aluno-periodo.php">
+            <i class="fa-solid fa-calendar"></i>
+            <span class="item-description">
+              Período Letivo
+            </span>
+          </a>
+        </li>
+  
+        <li class="side-item">
+          <a href="aluno-rematricula.php">
+            <i class="fa-solid fa-school"></i>
+            <span class="item-description">
+              Rematrícula
+            </span>
+          </a>
+        </li>
+  
+        <li class="side-item">
+          <a href="aluno-nota.php">
+            <i class="fa-solid fa-bars-progress"></i>
+            <span class="item-description">
+              Nota/Falta
+            </span>
+          </a>
+        </li>
+  
+        <li class="side-item active">
+          <a href="#">
+            <i class="fa-solid fa-clipboard-check"></i>
+            <span class="item-description">
+              Atividades
+            </span>
+          </a>
+        </li>
+      </ul>
+    </div>
+    
+    <div class="logout">
+      <a href="../login.php" target="_parent">
+      <button class="btn-logout">
+        <i class="fa-solid fa-right-from-bracket"></i>
+        Sair
+      </button>
+      </a>
+    </div>
+  </nav>
 </body>
 </html>

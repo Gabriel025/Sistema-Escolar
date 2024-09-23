@@ -8,7 +8,7 @@ html {
     -webkit-text-size-adjust: 100%; /* 2 */
 }
 
-body {
+main {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -17,10 +17,13 @@ body {
     background-image: url(../imagens/background.png);
     background-position: center;
     background-repeat: no-repeat;
-    background-size: cover;
 }
 
-main {
+.content * {
+    color: black;
+}
+
+.content {
     width: 450px;
     height: 600px;
     border-radius: 10px;
@@ -29,7 +32,7 @@ main {
 }
 
 @media screen and (min-width: 1920px) {
-    main {
+    .content {
         width: 500px;
         height: 700px;
     }
@@ -50,12 +53,12 @@ main {
     }
 }
 
-img {
+.logo {
     height: 105px;
 }
 
 @media screen and (min-width: 1920px) {
-    img {
+    .logo {
         height: 130px;
     }
 }
