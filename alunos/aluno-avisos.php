@@ -9,6 +9,7 @@ $query = "SELECT turma FROM tb_aluno WHERE usuario = '$usuario'";
 $result = mysqli_query($mysqli, $query);
 
 $row = mysqli_fetch_row($result);
+
 ?>
 
 <!DOCTYPE html>
@@ -19,6 +20,7 @@ $row = mysqli_fetch_row($result);
   <title>Document</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <link rel="stylesheet" href="../estilos/style.css">
+  <link rel="stylesheet" href="../estilos/avisos.css">
   <!-- FONTS -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -26,9 +28,6 @@ $row = mysqli_fetch_row($result);
 </head>
 <body>
   <main>
-    <p class="title">
-      oi
-    </p>
   </main>
   <nav class="sidebar">
     <div class="sidebar-content">

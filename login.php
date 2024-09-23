@@ -25,12 +25,12 @@ if(isset($_POST ["txt-usuario"]) != '') {
     }
     else if(mysqli_num_rows($professor) > 0) {
       $_SESSION['usuario-nome'] = $usuario;
-      header("Location: professores/profeossr-aviso.php");
+      header("Location: professores/professor-avisos.php");
       exit();
     }
     else {
       $_SESSION['usuario-nome'] = $usuario;
-      header("Location: secretaria/secreataria-aviso.php");
+      header("Location: secretaria/secretaria-avisos.php");
       exit();
     }
   }

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Recuperação de Senha</title>
+  <link rel="stylesheet" href="estilos/login.css">
+</head>
+<body>
+  <main class="main-small">
+    <div class="div-logo-small">
+      <img src="imagens/logo.png" alt="Logo" class="logo">
+    </div>
+    <form onsubmit="loginFunc()">
+      <p>
+        Por favor, digite o email associado a conta.
+      </p>
+      <label>Email</label>
+      <input type="text" name="txt-usuario" value="" size="35" maxlength="30" required="yes">
+  
+      <div class="button-small">
+        <button><a href="login.php">Cancelar</a></button>
+        <input type="submit" value="Enviar" class="enviar">
+      </div>
+    </form>
+  </main>
+</body>
+</html>
+
+<script>
+  function loginFunc(){
+    event.preventDefault();
+    alert("Instruções enviadas para o email.");
+    window.location="recuperar-senha.html";
+  }
+</script>

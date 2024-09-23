@@ -5,10 +5,6 @@ session_start(); // Para salvar o nome do úsuario que está logando
 
 $usuario = $_SESSION['usuario-nome'];
 
-$query = "SELECT turma FROM tb_aluno WHERE usuario = '$usuario'";
-$result = mysqli_query($mysqli, $query);
-
-$row = mysqli_fetch_row($result);
 ?>
 
 <!DOCTYPE html>
@@ -38,18 +34,12 @@ $row = mysqli_fetch_row($result);
               echo "Usuário: {$usuario}";
             ?>
           </span>
-          
-          <span class="item-description">
-            <?php
-              echo "Turma: {$row[0]}";
-            ?>   
-          </span>
         </p>
       </div>
   
       <ul class="side-items">
-        <li class="side-item">
-          <a href="aluno-avisos.php" target="_parent">
+      <li class="side-item">
+          <a href="professor-avisos" target="_parent">
             <i class="fa-solid fa-house"></i>
             <span class="item-description">
               Avisos
@@ -58,7 +48,7 @@ $row = mysqli_fetch_row($result);
         </li>
   
         <li class="side-item">
-          <a href="aluno-periodo.php">
+          <a href="professor-periodo.php">
             <i class="fa-solid fa-calendar"></i>
             <span class="item-description">
               Período Letivo
@@ -66,17 +56,8 @@ $row = mysqli_fetch_row($result);
           </a>
         </li>
   
-        <li class="side-item">
-          <a href="aluno-rematricula.php">
-            <i class="fa-solid fa-school"></i>
-            <span class="item-description">
-              Rematrícula
-            </span>
-          </a>
-        </li>
-  
-        <li class="side-item">
-          <a href="aluno-nota.php">
+        <li class="side-item active">
+          <a href="#">
             <i class="fa-solid fa-bars-progress"></i>
             <span class="item-description">
               Nota/Falta
@@ -84,11 +65,20 @@ $row = mysqli_fetch_row($result);
           </a>
         </li>
   
-        <li class="side-item active">
-          <a href="#">
+        <li class="side-item">
+          <a href="professor-atividades.php">
             <i class="fa-solid fa-clipboard-check"></i>
             <span class="item-description">
               Atividades
+            </span>
+          </a>
+        </li>
+
+        <li class="side-item">
+          <a href="chamada.php">
+            <i class="fa-solid fa-list"></i>
+            <span class="item-description">
+              Chamada Online
             </span>
           </a>
         </li>

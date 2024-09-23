@@ -26,9 +26,6 @@ $row = mysqli_fetch_row($result);
 </head>
 <body>
   <main>
-    <p class="title">
-      oi
-    </p>
   </main>
   <nav class="sidebar">
     <div class="sidebar-content">

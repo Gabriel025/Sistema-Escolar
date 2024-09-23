@@ -6,6 +6,8 @@
   session_start();
   $usuario = $_SESSION['usuario-nome'];
 
+  $usuario_editar = $_SESSION['usuario-editar'];
+
   $error = false;
   $usuario_error = false;
 
@@ -26,21 +28,24 @@
         $error = true;
     }
     else {
-        if ($divisao == "aluno" && $error == false && $usuario_error == false) {
-          $_SESSION['usuario-valor'] = $usuario;
-          $mysqli -> query ("INSERT INTO tb_usuarios VALUES ('$usuario','$senha','$divisao')");
-          $mysqli -> query ("INSERT INTO tb_aluno VALUES ('$usuario','$nome','')");
-          header("Location: cadastro-turma.php");
-          exit();
-        }
-        else if($divisao == "professor" && $error == false && $usuario_error == false) {
-          $mysqli -> query ("INSERT INTO tb_usuarios VALUES ('$usuario','$senha','$divisao')");
-          $mysqli -> query ("INSERT INTO tb_professor VALUES ('$usuario','$nome','')");
-        }
-        else if($divisao == "secretaria" && $error == false && $usuario_error == false) {
-          $mysqli -> query ("INSERT INTO tb_usuarios VALUES ('$usuario','$senha','$divisao')");
-          $mysqli -> query ("INSERT INTO tb_secretaria VALUES ('$usuario','$nome','')");
-        }
+      if ($divisao == "aluno" && $error == false && $usuario_error == false) {
+        $_SESSION['usuario-valor'] = $usuario;
+        $sql = $mysqli -> query("delete from tb_usuarios where usuario=". $_SESSION['usuario-editar']);
+        $mysqli -> query ("INSERT INTO tb_usuarios VALUES ('$usuario','$senha','$divisao')");
+        $mysqli -> query ("INSERT INTO tb_aluno VALUES ('$usuario','$nome','')");
+        header("Location: cadastro-turma.php");
+        exit();
+      }
+      else if($divisao == "professor" && $error == false && $usuario_error == false) {
+        $sql = $mysqli -> query("delete from tb_usuarios where usuario=". $_SESSION['usuario-editar']);
+        $mysqli -> query ("INSERT INTO tb_usuarios VALUES ('$usuario','$senha','$divisao')");
+        $mysqli -> query ("INSERT INTO tb_professor VALUES ('$usuario','$nome','')");
+      }
+      else if($divisao == "secretaria" && $error == false && $usuario_error == false) {
+        $sql = $mysqli -> query("delete from tb_usuarios where usuario=". $_SESSION['usuario-editar']);
+        $mysqli -> query ("INSERT INTO tb_usuarios VALUES ('$usuario','$senha','$divisao')");
+        $mysqli -> query ("INSERT INTO tb_secretaria VALUES ('$usuario','$nome','')");
+      }
     }
   }
 ?>
@@ -61,7 +66,7 @@
 </head>
 <body>
   <main>
-    <div class="content">
+    <div class="editar-content">
       <div class="div-logo">
         <img src="../imagens/logo.png" alt="Logo" class="logo">
       </div>
@@ -93,7 +98,7 @@
             }
         ?>
 
-        <label>Divisão</label>
+        <label>Função</label>
         <div class="div-select">
           <select name="txt-divisao">
             <option value="aluno">Aluno</option>
@@ -114,9 +119,15 @@
         </div>
 
         <div class="button">
-          <input type="submit" value="Cadastrar">
+          <input type="submit" value="Editar">
         </div>
       </form>
+      <center>
+      <div class="button-cancelar">
+        <a href="listagem.php"><button>Cancelar</button></a>
+      </div>
+      </center>
+      
     </div>
   </main>
   <nav class="sidebar">
@@ -161,7 +172,7 @@
           </a>
         </li>
   
-        <li class="side-item">
+        <li class="side-item active">
           <a href="listagem.php">
             <i class="fa-solid fa-magnifying-glass"></i>
             <span class="item-description">
@@ -170,8 +181,8 @@
           </a>
         </li>
   
-        <li class="side-item active">
-          <a href="#">
+        <li class="side-item">
+          <a href="cadastro.php">
             <i class="fa-solid fa-user-plus"></i>
             <span class="item-description">
               Novo Usuário

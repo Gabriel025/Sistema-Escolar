@@ -5,10 +5,6 @@ session_start(); // Para salvar o nome do úsuario que está logando
 
 $usuario = $_SESSION['usuario-nome'];
 
-$query = "SELECT turma FROM tb_aluno WHERE usuario = '$usuario'";
-$result = mysqli_query($mysqli, $query);
-
-$row = mysqli_fetch_row($result);
 ?>
 
 <!DOCTYPE html>
@@ -38,18 +34,12 @@ $row = mysqli_fetch_row($result);
               echo "Usuário: {$usuario}";
             ?>
           </span>
-          
-          <span class="item-description">
-            <?php
-              echo "Turma: {$row[0]}";
-            ?>   
-          </span>
         </p>
       </div>
   
       <ul class="side-items">
-        <li class="side-item">
-          <a href="aluno-avisos.php" target="_parent">
+        <li class="side-item active">
+          <a href="#" target="_parent">
             <i class="fa-solid fa-house"></i>
             <span class="item-description">
               Avisos
@@ -58,7 +48,7 @@ $row = mysqli_fetch_row($result);
         </li>
   
         <li class="side-item">
-          <a href="aluno-periodo.php">
+          <a href="secretaria-periodo.php">
             <i class="fa-solid fa-calendar"></i>
             <span class="item-description">
               Período Letivo
@@ -67,7 +57,7 @@ $row = mysqli_fetch_row($result);
         </li>
   
         <li class="side-item">
-          <a href="aluno-rematricula.php">
+          <a href="secretaria-rematricula.php">
             <i class="fa-solid fa-school"></i>
             <span class="item-description">
               Rematrícula
@@ -76,19 +66,19 @@ $row = mysqli_fetch_row($result);
         </li>
   
         <li class="side-item">
-          <a href="aluno-nota.php">
-            <i class="fa-solid fa-bars-progress"></i>
+        <a href="listagem.php">
+            <i class="fa-solid fa-magnifying-glass"></i>
             <span class="item-description">
-              Nota/Falta
+              Listagem Usuários
             </span>
           </a>
         </li>
   
-        <li class="side-item active">
-          <a href="#">
-            <i class="fa-solid fa-clipboard-check"></i>
+        <li class="side-item">
+          <a href="cadastro.php">
+            <i class="fa-solid fa-user-plus"></i>
             <span class="item-description">
-              Atividades
+              Novo Usuário
             </span>
           </a>
         </li>
