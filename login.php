@@ -20,17 +20,17 @@ if(isset($_POST ["txt-usuario"]) != '') {
 
     if(mysqli_num_rows($aluno) > 0) {
       $_SESSION['usuario-nome'] = $usuario; // Lembrando qual o úsuario que está logando, para mostrar seu nome mais a frente.
-      header("Location: alunos/aluno-sidebar.html");
+      header("Location: alunos/aluno-avisos.php");
       exit();
     }
     else if(mysqli_num_rows($professor) > 0) {
       $_SESSION['usuario-nome'] = $usuario;
-      header("Location: professores/professor-sidebar.html");
+      header("Location: professores/profeossr-aviso.php");
       exit();
     }
     else {
       $_SESSION['usuario-nome'] = $usuario;
-      header("Location: secretaria/secretaria-sidebar.html");
+      header("Location: secretaria/secreataria-aviso.php");
       exit();
     }
   }

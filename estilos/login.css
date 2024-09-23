@@ -1,6 +1,9 @@
 * {
     overflow: hidden;
+    font-family: 'Poppins', sans-serif;
 }
+
+/* Padronização de alguns elementos */
 
 html {
     line-height: 1.15; /* 1 */
@@ -179,6 +182,7 @@ input {
     background-color: #581663;
     border-radius: 5px;
     font-size: 25px;
+    offset: none;
 }
 
 .button-small a {

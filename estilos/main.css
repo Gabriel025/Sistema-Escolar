@@ -1,0 +1,13 @@
+main {
+    display: flex;
+    justify-content: space-between;
+}
+
+.title {
+    background-color: green;
+    color: black;
+}
+
+.content {
+    width: 84%;
+}
