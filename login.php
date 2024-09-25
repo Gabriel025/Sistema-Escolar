@@ -1,44 +1,57 @@
 <?php
+  // Conectando ao banco de dados
+  include "database.php"; 
 
-// Conectando ao banco de dados
-$mysqli = new mysqli("localhost","root","","sistema_academico");
-$error = false;
+  // Uma vaŕiavel que vai se tornar true, caso o úsuario tente inserir informações inválidas
+  $error = false;
 
-session_start(); // Para salvar o nome do úsuario que está logando
+  // Iniciando uma sessão local para salvar dados temporariamente.
+  session_start();
 
-if(isset($_POST ["txt-usuario"]) != '') {
-  $usuario = $_POST ["txt-usuario"];
-  $senha = $_POST ["txt-senha"];
+  // Caso o campo que contenha a informação "txt-usuario" não estiver vazio (ou seja: o úsuario pressionou o botão logar).
+  if(isset($_POST ["txt-usuario"]) != '') {
 
-  $sql = $mysqli -> query("SELECT * FROM tb_usuarios WHERE usuario = '$usuario' AND senha = '$senha'");
+    // Declarando varíaveis e atribuindo o valor do que o úsuario digitou no form.
+    $usuario = $_POST ["txt-usuario"];
+    $senha = $_POST ["txt-senha"];
 
-  // Caso exista um úsuario e senha compatíveis com o que foi digitado no banco.
-	if (mysqli_num_rows($sql) > 0) {
-    // Caso exista um úsuario com uma divisão específica no banco.
-    $aluno = $mysqli -> query("SELECT * FROM tb_usuarios WHERE usuario = '$usuario' AND divisao = 'aluno'");
-    $professor = $mysqli -> query("SELECT * FROM tb_usuarios WHERE usuario = '$usuario' AND divisao = 'professor'");
+    /* Essa variável agora tem o valor de uma query no mysql.
+    Especificamente ela traz linhas onde o usuario e a senha são iguais aos digitados pelo usuário */
+    $sql = "SELECT * FROM tb_usuarios WHERE usuario = '$usuario' AND senha = '$senha'";
 
-    if(mysqli_num_rows($aluno) > 0) {
-      $_SESSION['usuario-nome'] = $usuario; // Lembrando qual o úsuario que está logando, para mostrar seu nome mais a frente.
-      header("Location: alunos/aluno-avisos.php");
-      exit();
+    // $result está fazendo uma query no mysql, valor1 = banco de dados; valor2 = a query em si.
+    $result = mysqli_query($conn, $sql);
+
+    // Se tiver um usuário e senha compativeis com o que foi digitado.
+    if(mysqli_num_rows($result) > 0) {
+      // $row pega as colunas associadas com o que foi ganho em $result.
+      $row = mysqli_fetch_assoc($result);
+
+      // Marcando temporariamente o nome do usuário que está logando.
+      $_SESSION['usuario-login'] = $usuario;
+      
+      // Caso a coluna divisão da linha desse úsuario for igual a nossa condição.
+      // myqsli_close == fecha a conexão com o banco de dados.
+      // header Location == Vai pra essa outra página.   
+      if($row["divisao"] == "aluno") {
+        mysqli_close($conn);
+        header("Location: aluno/aluno.php");
+      }
+      else if($row["divisao"] == "professor") {
+        mysqli_close($conn);
+        header("Location: professor/professor.php");
+      }
+      else {
+        mysqli_close($conn);
+        header("Location: secretaria/secretaria.php");
+      }
     }
-    else if(mysqli_num_rows($professor) > 0) {
-      $_SESSION['usuario-nome'] = $usuario;
-      header("Location: professores/professor-avisos.php");
-      exit();
-    }
+
+    // Caso contrário significa que o úsuario/senha estavam errados.
     else {
-      $_SESSION['usuario-nome'] = $usuario;
-      header("Location: secretaria/secretaria-avisos.php");
-      exit();
+      $error = true;
     }
   }
-
-  else {
-    $error = true;
-  }
-} 
 ?>
 
 <!DOCTYPE html>
@@ -47,19 +60,27 @@ if(isset($_POST ["txt-usuario"]) != '') {
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Login</title>
-  <link rel="stylesheet" href="estilos/login.css">
+  <!-- Estilos -->
+  <link rel="stylesheet" href="styles/normalize.css">
+  <link rel="stylesheet" href="styles/login.css">
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
 </head>
-<body>
-  <main>
+<body class="body-login">
+  <main class="main-login">
     <div class="div-logo">
-      <img src="imagens/logo.png" alt="Logo" class="logo">
+      <img src="imagens/logo-alt.png" alt="Logo">
     </div>
-    <form name="form-login" method ="post">
+    <form name="form-login" method ="post" class="form-login">
       <label>Usuário</label>
-      <?php 
+      <?php
+          /* Caso falso, a borda do input vai ter a cor padrão */
           if($error == false) {
             echo '<input type="text" name="txt-usuario" value="" size="35" maxlength="30" required="yes">';
           }
+          /* Caso verdadeiro, o input ganhará uma classe, que faz sua borda ficar vermelha */
           else {
             echo '<input type="text" name="txt-usuario" value="" size="35" maxlength="30" required="yes" class="input-erro">';
           }
@@ -68,13 +89,16 @@ if(isset($_POST ["txt-usuario"]) != '') {
       <label>Senha</label>
       <?php 
           if($error == false) {
-            echo '<input type="password" name="txt-senha" value="" size="35" maxlength="30" required="yes">';
+            echo '<input type="password" name="txt-senha" value="" maxlength="30" required="yes">';
           }
           else {
-            echo '<input type="password" name="txt-senha" value="" size="35" maxlength="30" required="yes" class="input-erro">';
+            echo '<input type="password" name="txt-senha" value="" maxlength="30" required="yes" class="input-erro">';
           }
       ?>
 
+      <!-- Aqui é necessário criar uma div para definir um espaço pro texto
+      Sem essa div, o texto iria apareçer e mudar a posição do botão.
+      Basicamente ela significa: "Ei, está vazio no momento, mas esse espaço está reservado." -->
       <div class="div-error">
         <?php 
           if($error == true) {
@@ -83,11 +107,10 @@ if(isset($_POST ["txt-usuario"]) != '') {
         ?>
       </div>
 
-      <div class="button">
+      <div class="button-login">
         <input type="submit" value="Entrar">
       </div>
     </form>
-    <center><a href="recuperar-senha.html">Esqueçeu a senha?</a></center>
   </main>
 </body>
 </html>

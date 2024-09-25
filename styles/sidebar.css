@@ -1,23 +1,11 @@
-* {
+body {
+    margin: 0;
+}
+
+.sidebar * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Poppins', sans-serif;
-}
-
-body {
-    display: flex;
-    justify-content: space-between;
-    min-height: 100vh;
-}
-
-main {
-    width: 84%;
-}
-
-/* SIDEBAR */
-
-.sidebar *{
     color: white;
 }
 
@@ -27,12 +15,13 @@ main {
     justify-content: space-between;
     height: 100vh;
     width: 16%;
-    background-color: #561b8d;
+    background-color: #242F40;
+    border-right: 1px solid #666666;
 }
 
 @media screen and (min-width: 1920px) {
     .sidebar {
-        width: 16%;
+        width: 14%;
     }
 }
 
@@ -40,28 +29,29 @@ main {
     padding: 12px;
 }
 
-.user {
+.sidebar-user {
     display: flex;
     align-items: center;
     gap: 20px;
     margin-bottom: 24px;
 }
 
-.user-avatar {
+.sidebar-avatar {
     width: 50px;
     object-fit: cover;
 }
 
-.user-infos {
+.sidebar p {
     display: flex;
     flex-direction: column;
 }
 
-.user-infos span:last-child {
+.sidebar-user-infos span:last-child {
     font-size: 12px;
 }
 
 .side-items {
+    width: 100%;
     display: flex;
     flex-direction: column;
     gap: 8px;
@@ -70,7 +60,6 @@ main {
 
 .side-item {
     border-radius: 8px;
-    padding: 14px;
     cursor: pointer;
 }
 
@@ -80,7 +69,7 @@ main {
 
 .side-item:hover:not(.active),
 .btn-logout:hover {
-    background-color: #6a34d4;
+    background-color: #645699;
 }
 
 .side-item a {
@@ -89,6 +78,7 @@ main {
     justify-content: flex-start;
     text-decoration: none;
     gap: 14px;
+    padding: 14px;
 }
 
 .side-item i {
@@ -106,7 +96,7 @@ main {
 }
 
 .logout {
-    border-top: 1px solid black;
+    border-top: 1px solid #666666;
 }
 
 .logout a{
@@ -118,7 +108,7 @@ main {
     align-items: center;
     gap: 15px;
     border: none;
-    padding: 12px 87px;
+    padding: 12px 88px;
     text-align: start;
     font-size: 14px;
     background-color: transparent;
@@ -127,13 +117,19 @@ main {
 
 @media screen and (min-width: 1920px) {
     .btn-logout {
-        padding: 12px 125px;
+        font-size: 16px;
+        padding: 12px 104px;
     }
 }
 
 .item-description {
     overflow: hidden;
     white-space: nowrap;
-    text-overflow: ellipsis;
     font-size: 15px;
+}
+
+@media screen and (min-width: 1920px) {
+    .item-description {
+        font-size: 17px;
+    }
 }

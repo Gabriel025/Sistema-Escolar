@@ -1,0 +1,128 @@
+.body-login * {
+    color: white;
+}
+
+.body-login {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #242F40;
+}
+
+.main-login {
+    width: 425px;
+    height: 550px;
+    border-radius: 10px;
+    border: 1px solid #666666;
+}
+
+@media screen and (min-width: 1920px) {
+    .main-login {
+        width: 500px;
+        height: 660px;
+    }
+}
+
+.div-logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10%;
+    margin-bottom: 10%;
+    height: 100px;
+}
+
+@media screen and (min-width: 1920px) {
+    .div-logo {
+        margin-bottom: 15%;
+    }
+}
+
+.div-logo img {
+    width: 125px;
+}
+
+@media screen and (min-width: 1920px) {
+    .div-logo img {
+        width: 160px;
+    }
+}
+
+.form-login {
+    margin-left: 10%;
+}
+
+@media screen and (min-width: 1920px) {
+    .form-login label {
+        font-size: 20px;
+    }
+}
+
+.form-login input {
+    display: block;
+    margin-top: 5px;
+    margin-bottom: 30px;
+    width: 85%;
+    height: 30px;
+    border: 1px solid black;
+    border-radius: 6px;
+    background-color: #374151;
+}
+
+@media screen and (min-width: 1920px) {
+    .form-login input {
+        height: 36px;
+        font-size: 18px;
+    }
+}
+
+.form-login .input-erro {
+    border: 1px solid #A8394D;
+    outline-color: #A8394D;
+}
+
+.div-error {
+    display: flex;
+    justify-content: center;
+    margin-top: -5px;
+    width: 87%;
+    height: 35px;
+    color: rgb(66, 66, 66);
+}
+
+@media screen and (min-width: 1920px) {
+    .div-error p {
+        font-size: 20px;
+    }
+}
+
+.button-login {
+    margin-top: 10%;
+}
+
+@media screen and (min-width: 1920px) {
+    .button-login {
+        margin-top: 15%;
+    }
+}
+
+.button-login input {
+    height: 50px;
+    width: 87%;
+    background-color: #645699;
+    color: white;
+    font-size: 24px;
+}
+
+@media screen and (min-width: 1920px) {
+    .button-login input {
+        height: 60px;
+        font-size: 30px;
+    }
+}
+
+.button-login input:hover {
+    background-color: #7564B3;
+    cursor: pointer;
+}
