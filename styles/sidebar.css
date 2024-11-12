@@ -36,9 +36,13 @@ body {
     margin-bottom: 24px;
 }
 
+.user-info-div {
+    height: 40px;
+}
+
 .user-info-div p {
-    font-size: 13px;
     margin-bottom: 3px;
+    font-size: 13px;
 }
 
 @media screen and (min-width: 1920px) {

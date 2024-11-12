@@ -2,7 +2,7 @@
   $db_server = "localhost";
   $db_user = "root";
   $db_pass = "usbw";
-  $db_name = "sistema_academico";
+  $db_name = "db_sistema_academico";
   $conn = "";
 
   try {

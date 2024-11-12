@@ -1,15 +1,63 @@
+* {
+  color: white;
+}
+
 main {
   display: flex;
+  flex-direction: column;
   background-color: #f2f0ef;
   /* background-color: green; */
+}
+
+.search-div {
+  display: flex;
+  margin-top: 50px;
+  margin-left: 50px;
+  /* background-color: green; */
+}
+
+.search-div input:first-child {
+  width: 1172px;
+  height: 35px;
+  border-top-right-radius: 0;
+  border-top-left-radius: 0;
+  border-radius: 5px;
+  box-shadow: 5px 5px 18px #888888;
+  color: black;
+}
+
+.search-div input:nth-child(2) {
+  margin-left: -45px;
+  width: 40px;
+  height: 38px;
+  border: none;
+  border-radius: 5px;
+  background-color: white;
+  /* background-color: green; */
+  color: black;
+}
+
+.search-div input:nth-child(2):hover {
+  cursor: pointer;
+}
+
+.search-div i {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: -34px;
+  font-size: 24px;
+  color: black;
+  /* background-color: blue; */
+  pointer-events: none; /* Faz com que o mouse interaja com o que está embaixo desse elemento */
 }
 
 .card-div {
   overflow: auto;
   margin-left: 50px;
-  margin-top: 100px;
+  margin-top: 35px;
   width: 75%;
-  height: 800px;
+  height: 770px;
   /* background-color: blue; */
 }
 
@@ -38,6 +86,27 @@ main {
 }
 
 .card-info {
+  margin-top: 15px;
+  margin-left: 10px;
   width: 100%;
-  /* background-color: black; */
+  height: 50px;
+}
+
+p {
+  margin: 0;
+}
+
+.card-info p {
+  font-size: 15px;
+  margin-top: 5px;
+}
+
+.card-name {
+  display: inline-block;
+}
+
+.card-name:nth-last-child(2n) {
+  margin-left: 6px;
+  color: #d6d3d2;
+  font-style: italic;
 }

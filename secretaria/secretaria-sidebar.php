@@ -29,7 +29,8 @@
       <div class="user-info-div">
         <p>
             <?php
-            echo "Usuário: ";
+              echo "Usuário: ";
+              echo "<span>"; // Serve para mudar a cor do que vem a seguir
               // Caso o nome do úsuario for maior que 12 caracteres, será printado somente as 12 primeiras letras de seu nome de usuário.
               if(strlen($usuario) > 12) {
                 for ($i = 0; $i < 10; $i++) {
@@ -40,7 +41,12 @@
               else {
                 echo "{$usuario}";
               }
+              echo "</span>";
             ?>
+        </p>
+
+        <p>
+          Cargo:
         </p>
       </div>
     </div>
@@ -87,7 +93,7 @@
         <a href="secretaria.php?pagina=secretaria-listagem">
           <i class="fa-solid fa-clipboard-check"></i>
           <span class="item-description">
-            Lista de Úsuarios
+            Administrar Usuários
           </span>
         </a>
       </li>
