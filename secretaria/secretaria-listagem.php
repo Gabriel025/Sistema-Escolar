@@ -28,7 +28,7 @@
 <main>
   <div class="search-div">
     <form name="search-form" method="POST">
-      <input type="text" name="search-user" placeholder="Pesquisar">
+      <input type="text" name="search-user" placeholder="Pesquisar" value="<?php echo $_POST['search-user'] ?>">
       <input type="submit" value="" class="search-button">
     </form>
     <i class="fa-solid fa-magnifying-glass"></i>

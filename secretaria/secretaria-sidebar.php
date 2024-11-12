@@ -91,7 +91,7 @@
 
       <li class="side-item <?php if ($pagina == "secretaria-listagem") {echo "active";} ?>">
         <a href="secretaria.php?pagina=secretaria-listagem">
-          <i class="fa-solid fa-clipboard-check"></i>
+          <i class="fa-solid fa-user-plus"></i>
           <span class="item-description">
             Administrar Usuários
           </span>
