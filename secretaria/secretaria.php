@@ -17,27 +17,12 @@
 <body>
   <?php
     include "secretaria-sidebar.php";
-    if($pagina == "avisos") {
-      echo '<link rel="stylesheet" href="../styles/avisos.css">';
-      include "../avisos.php";
-    }
-    else if($pagina == "periodo-letivo") {
-      include "../periodo-letivo.php";
-    }
-    else if($pagina == "secretaria-avisos") {
-      include "secretaria-avisos.php";
-    }
-    else if($pagina == "secretaria-rematricula") {
-      include "secretaria-rematricula.php";
-    }
-    else if($pagina == "secretaria-listagem") {
-      include "secretaria-listagem.php";
-    }
-    else if($pagina == "secretaria-cadastro") {
-      include "secretaria-cadastro.php";
+    if ($pagina == "avisos" || $pagina == "periodo-letivo") {
+      // $pagina será trocado pelo nome do arquivo correto.
+      include "../{$pagina}.php";
     }
     else {
-      echo "Erro conectando com a outra página";
+      include "{$pagina}.php";
     }
   ?>
 </body>

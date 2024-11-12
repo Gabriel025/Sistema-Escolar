@@ -1,5 +1,5 @@
 .body-login * {
-    color: white;
+    color: black;
 }
 
 .body-login {
@@ -7,7 +7,10 @@
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    background-color: #242F40;
+    background-image: url(../imagens/background.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 .main-login {
@@ -15,6 +18,7 @@
     height: 550px;
     border-radius: 10px;
     border: 1px solid #666666;
+    background-color: rgb(245, 245, 245);
 }
 
 @media screen and (min-width: 1920px) {
@@ -67,7 +71,7 @@
     height: 30px;
     border: 1px solid black;
     border-radius: 6px;
-    background-color: #374151;
+    background-color: rgb(245, 245, 245);
 }
 
 @media screen and (min-width: 1920px) {
@@ -82,7 +86,7 @@
     outline-color: #A8394D;
 }
 
-.div-error {
+.div-erro {
     display: flex;
     justify-content: center;
     margin-top: -5px;
@@ -92,7 +96,7 @@
 }
 
 @media screen and (min-width: 1920px) {
-    .div-error p {
+    .div-erro p {
         font-size: 20px;
     }
 }
@@ -110,7 +114,7 @@
 .button-login input {
     height: 50px;
     width: 87%;
-    background-color: #645699;
+    background-color: #58498b;
     color: white;
     font-size: 24px;
 }
@@ -123,6 +127,6 @@
 }
 
 .button-login input:hover {
-    background-color: #7564B3;
+    background-color: #645699;
     cursor: pointer;
 }

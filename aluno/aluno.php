@@ -17,25 +17,14 @@
 <body>
   <?php
     include "aluno-sidebar.php";
-    if($pagina == "avisos") {
-      echo '<link rel="stylesheet" href="../styles/avisos.css">';
-      include "../avisos.php";
-    }
-    else if($pagina == "periodo-letivo") {
-      include "../periodo-letivo.php";
-    }
-    else if($pagina == "aluno-rematricula") {
-      include "aluno-rematricula.php";
-    }
-    else if($pagina == "aluno-nota") {
-      include "aluno-nota.php";
-    }
-    else if($pagina == "aluno-atividades") {
-      include "aluno-atividades.php";
+    if ($pagina == "avisos" || $pagina == "periodo-letivo") {
+      // $pagina será trocado pelo nome do arquivo correto.
+      include "../{$pagina}.php";
     }
     else {
-      echo "Erro conectando com a outra página";
+      include "{$pagina}.php";
     }
+    
   ?>
 </body>
 </html>

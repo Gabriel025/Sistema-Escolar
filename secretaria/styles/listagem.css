@@ -1,0 +1,43 @@
+main {
+  display: flex;
+  background-color: #f2f0ef;
+  /* background-color: green; */
+}
+
+.card-div {
+  overflow: auto;
+  margin-left: 50px;
+  margin-top: 100px;
+  width: 75%;
+  height: 800px;
+  /* background-color: blue; */
+}
+
+.user-card {
+  display: flex;
+  width: 95%;
+  margin-bottom: 25px;
+  height: 80px;
+  border: 1px solid black;
+  border-radius: 5px;
+  background-color: #58498b;
+  /* background-color: yellow; */
+}
+
+.card-avatar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 80px;
+  /* background-color: green; */
+}
+
+.card-avatar img{
+  width: 45px;
+  object-fit: cover;
+}
+
+.card-info {
+  width: 100%;
+  /* background-color: black; */
+}

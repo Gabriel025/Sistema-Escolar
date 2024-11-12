@@ -15,7 +15,7 @@ body {
     justify-content: space-between;
     height: 100vh;
     width: 16%;
-    background-color: #242F40;
+    background-color: #58498b;
     border-right: 1px solid #666666;
 }
 
@@ -36,18 +36,20 @@ body {
     margin-bottom: 24px;
 }
 
+.user-info-div p {
+    font-size: 13px;
+    margin-bottom: 3px;
+}
+
+@media screen and (min-width: 1920px) {
+    .user-info-div p {
+        font-size: 15px;
+    }
+}
+
 .sidebar-avatar {
     width: 50px;
     object-fit: cover;
-}
-
-.sidebar p {
-    display: flex;
-    flex-direction: column;
-}
-
-.sidebar-user-infos span:last-child {
-    font-size: 12px;
 }
 
 .side-items {
@@ -128,8 +130,13 @@ body {
     font-size: 15px;
 }
 
+
 @media screen and (min-width: 1920px) {
     .item-description {
         font-size: 17px;
+    }
+
+    .user-info-div {
+        font-size: 15px;
     }
 }

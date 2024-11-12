@@ -31,34 +31,35 @@
   <div class="sidebar-content">
     <div class="sidebar-user">
       <img src="../imagens/perfil_vazio.png" class="sidebar-avatar" alt="Avatar">
-      <p>
-        <span class="item-description">
-          <?php
-          echo "Usuário: ";
-            // Caso o nome do úsuario for maior que 7, será printado somente as 7 primeiras letras de seu nome.
-            if(strlen($usuario) > 7) {
-              for ($i = 0; $i < 7; $i++) {
-                echo "{$usuario[$i]}";
+      <div class="user-info-div">
+        <p>
+            <?php
+            echo "Usuário: ";
+              // Caso o nome do úsuario for maior que 12 caracteres, será printado somente as 12 primeiras letras de seu nome de usuário.
+              if(strlen($usuario) > 12) {
+                for ($i = 0; $i < 10; $i++) {
+                  echo "{$usuario[$i]}";
+                }
+                echo "...";
               }
-              echo "...";
-            }
-            else {
-              echo "{$usuario}";
-            }
-          ?>
-        </span>
-        
-        <span class="item-description">
+              else {
+                echo "{$usuario}";
+              }
+            ?>
+        </p>
+
+        <p>
           <?php
             echo "Turma: {$row[0]}";
           ?>   
-        </span>
-      </p>
+        </p>
+      </div>
     </div>
 
     <ul class="side-items">
       <!-- Caso a página for a ativa, dar echo no "active" para mostrar isso visualmente. -->
       <li class="side-item <?php if ($pagina == "avisos") {echo "active";} ?>">
+        <!-- Muda o valor do GET de "pagina" para a página que esta sendo ativada. -->
         <a href="aluno.php?pagina=avisos">
           <i class="fa-solid fa-house"></i>
           <span class="item-description">

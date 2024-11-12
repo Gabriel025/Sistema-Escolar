@@ -26,23 +26,23 @@
   <div class="sidebar-content">
     <div class="sidebar-user">
       <img src="../imagens/perfil_vazio.png" class="sidebar-avatar" alt="Avatar">
-      <p>
-        <span class="item-description">
-          <?php
-          echo "Usuário: ";
-            // Caso o nome do úsuario for maior que 7, será printado somente as 7 primeiras letras de seu nome.
-            if(strlen($usuario) > 9) {
-              for ($i = 0; $i < 7; $i++) {
-                echo "{$usuario[$i]}";
+      <div class="user-info-div">
+        <p>
+            <?php
+            echo "Usuário: ";
+              // Caso o nome do úsuario for maior que 12 caracteres, será printado somente as 12 primeiras letras de seu nome de usuário.
+              if(strlen($usuario) > 12) {
+                for ($i = 0; $i < 10; $i++) {
+                  echo "{$usuario[$i]}";
+                }
+                echo "...";
               }
-              echo "...";
-            }
-            else {
-              echo "{$usuario}";
-            }
-          ?>
-        </span>
-      </p>
+              else {
+                echo "{$usuario}";
+              }
+            ?>
+        </p>
+      </div>
     </div>
 
     <ul class="side-items">

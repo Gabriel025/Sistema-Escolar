@@ -1,9 +1,7 @@
-* {
-    color: white;
-}
-
 body {
     display: flex;
-    overflow: hidden;
-    background-color: #242F40;
+}
+
+main {
+    width: 100%;
 }

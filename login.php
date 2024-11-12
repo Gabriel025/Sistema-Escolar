@@ -2,16 +2,13 @@
   // Conectando ao banco de dados
   include "database.php"; 
 
-  // Uma vaŕiavel que vai se tornar true, caso o úsuario tente inserir informações inválidas
-  $error = false;
+  // Uma vaŕiavel que vai se tornar true, caso o usuário tente inserir informações inválidas
+  $erro = false;
 
-  // Iniciando uma sessão local para salvar dados temporariamente.
-  session_start();
-
-  // Caso o campo que contenha a informação "txt-usuario" não estiver vazio (ou seja: o úsuario pressionou o botão logar).
+  // Caso o campo que contenha a informação "txt-usuario" não estiver vazio (ou seja: o usuário pressionou o botão logar).
   if(isset($_POST ["txt-usuario"]) != '') {
 
-    // Declarando varíaveis e atribuindo o valor do que o úsuario digitou no form.
+    // Declarando varíaveis e atribuindo o valor do que o usuário digitou no form.
     $usuario = $_POST ["txt-usuario"];
     $senha = $_POST ["txt-senha"];
 
@@ -27,29 +24,26 @@
       // $row pega as colunas associadas com o que foi ganho em $result.
       $row = mysqli_fetch_assoc($result);
 
+      // Iniciando uma sessão local para salvar dados temporariamente.
+      session_start();
+
       // Marcando temporariamente o nome do usuário que está logando.
       $_SESSION['usuario-login'] = $usuario;
+
+      // salvando a divisão(cargo) do usuário que está logando
+      $divisao = $row["divisao"];
       
-      // Caso a coluna divisão da linha desse úsuario for igual a nossa condição.
       // myqsli_close == fecha a conexão com o banco de dados.
-      // header Location == Vai pra essa outra página.   
-      if($row["divisao"] == "aluno") {
-        mysqli_close($conn);
-        header("Location: aluno/aluno.php");
-      }
-      else if($row["divisao"] == "professor") {
-        mysqli_close($conn);
-        header("Location: professor/professor.php");
-      }
-      else {
-        mysqli_close($conn);
-        header("Location: secretaria/secretaria.php");
-      }
+      // header Location == Vai pra essa outra página.
+      
+      mysqli_close($conn);
+      header("Location: {$divisao}/{$divisao}.php");
+
     }
 
-    // Caso contrário significa que o úsuario/senha estavam errados.
+    // Caso contrário significa que o usuário/senha estavam errados.
     else {
-      $error = true;
+      $erro = true;
     }
   }
 ?>
@@ -60,13 +54,16 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Login</title>
+
   <!-- Estilos -->
   <link rel="stylesheet" href="styles/normalize.css">
   <link rel="stylesheet" href="styles/login.css">
-  <!-- Fonts -->
+
+  <!-- Fontes -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+
 </head>
 <body class="body-login">
   <main class="main-login">
@@ -77,7 +74,7 @@
       <label>Usuário</label>
       <?php
           /* Caso falso, a borda do input vai ter a cor padrão */
-          if($error == false) {
+          if($erro == false) {
             echo '<input type="text" name="txt-usuario" value="" size="35" maxlength="30" required="yes">';
           }
           /* Caso verdadeiro, o input ganhará uma classe, que faz sua borda ficar vermelha */
@@ -88,7 +85,7 @@
   
       <label>Senha</label>
       <?php 
-          if($error == false) {
+          if($erro == false) {
             echo '<input type="password" name="txt-senha" value="" maxlength="30" required="yes">';
           }
           else {
@@ -99,9 +96,9 @@
       <!-- Aqui é necessário criar uma div para definir um espaço pro texto
       Sem essa div, o texto iria apareçer e mudar a posição do botão.
       Basicamente ela significa: "Ei, está vazio no momento, mas esse espaço está reservado." -->
-      <div class="div-error">
+      <div class="div-erro">
         <?php 
-          if($error == true) {
+          if($erro == true) {
             echo "<p> Informações Inválidas </p>";
           }
         ?>
