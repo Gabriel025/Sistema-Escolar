@@ -4,11 +4,14 @@
   // Iniciando uma sessão local para salvar dados temporariamente.
   session_start();
 
+  // Se o usuário pressionar o botão de filtro
   if(isset($_POST['filter_button']) != '') 
   {
+    // Caso o valor "filtro" que está salvo na sessão seja igual a "usuario"
     if ($_SESSION['filter'] == "usuario")
     {
       $_SESSION['filter'] = "nome";
+      // Variável filtro para não ter que digitar um nome tão grande
       $filtro = $_SESSION['filter'];
     }
     else
@@ -17,31 +20,41 @@
       $filtro = $_SESSION['filter'];
     }  
   }
+  // Caso o botão de filtro não for pressionado
   else {
+    // Se o valor de filtro salvo na sessão não for nome. [Caso seja nome significa que o usuário já pressionou o botão de filtro antes]
     if ($_SESSION['filter'] != "nome")
     {
+      // Esse if so acontece 1 vez, que é quando o usuário abre essa pagina pela primeira vez
       $_SESSION['filter'] = "usuario"; // Salva na sessão o filtro padrão "usuario"
     }
     $filtro = $_SESSION['filter'];
   }
 
-  echo "<p style=\"color: black\">{$filtro}</p>";
-
+  // Caso o usuário pressione o botão de pesquisar, e ele não esteja vazio
   if(isset($_POST['search-user']) != '') 
   {
+    // Query sql para procrurar na tabela usuários, baseado no filtro selecionado
     $sql = "SELECT * FROM tb_usuarios WHERE $filtro LIKE '{$_POST['search-user']}%' ORDER BY $filtro ASC";
     $result = mysqli_query($conn, $sql);
+
+    // Salvando numa sessão local o que o usuário pesquisou.
     $_SESSION['search-query'] = $_POST['search-user'];
-  } 
+  }
+  // Caso o botão de pesquisa não tiver sido pressionado (Isso pode acontecer de 2 formas: 1°: quando o usuário entra nessa página, 2°: quando ele pressione o filtro).
   else 
   {
+    // Se a variável de sessão que salva o que o usuário pesquisa estiver vazia.
     if ($_SESSION['search-query'] == '')
     {
-      $sql = "SELECT * FROM tb_usuarios ORDER BY nome ASC";
+      // Por padrão mostra todos os usuários em ordem alfabética do filtro.
+      $sql = "SELECT * FROM tb_usuarios ORDER BY $filtro ASC";
       $result = mysqli_query($conn, $sql);
     }
+    // Caso a variável de sessão "search-query" não estiver vazia, isso significa que o filtro foi pressionado, porém ainda tem informação na barra de pesquisa.
     else
     {
+      // Mostra todos os usuários/nomes que começam com o que foi digitado na barra de pesquisa
       $sql = "SELECT * FROM tb_usuarios WHERE $filtro LIKE '{$_SESSION['search-query']}%' ORDER BY $filtro ASC";
       $result = mysqli_query($conn, $sql);
     }
@@ -57,6 +70,7 @@
 
   <!-- Estilos -->
   <link rel="stylesheet" href="styles/listagem.css">
+  <link rel="stylesheet" href="../styles/normalize.css">
 </head>
 <main>
 
@@ -70,7 +84,7 @@
         </div>
 
         <div class="search-input">
-          <input type="text" name="search-user" placeholder="Pesquisar" value="<?php echo $_SESSION['search-query'] ?>">
+          <input type="text" name="search-user" placeholder="Pesquisar" value="<?php echo $_SESSION['search-query'] // Serve para não apagar o que o usuário digita ?>">
         </div>
       </form>
     </div>
@@ -78,6 +92,9 @@
     <div class="search-buttons">
       <form class="filter-form" method="POST">
         <div class="inputIcon-div">
+          <p>
+            <?php echo "{$filtro}"; ?>
+          </p>
           <i class="fa-solid fa-filter"></i>
           <input type="submit" name="filter_button" value=".">  
         </div>

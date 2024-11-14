@@ -94,26 +94,33 @@ main {
 
 .inputIcon-div {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   width: 25px;
-  height: 25px;
+  height: 55px;
   /* background-color: yellow; */
 }
 
 .inputIcon-div input {
   width: 100%;
-  height: 100%;
+  height: 20px;
   border: none;
   background-color: transparent;
+  /* background-color: red; */
 }
 
 .inputIcon-div input:hover {
   cursor: pointer;
 }
 
-.search-buttons i {
+.inputIcon-div p {
+  color: black;
+}
+
+.inputIcon-div i {
   position: fixed;
+  margin-top: 18px;
   font-size: 18px;
   color: black;
   pointer-events: none;
