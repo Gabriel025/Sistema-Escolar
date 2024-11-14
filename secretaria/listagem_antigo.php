@@ -1,50 +1,15 @@
 <?php
   include "../database.php";
 
-  // Iniciando uma sessão local para salvar dados temporariamente.
-  session_start();
-
-  if(isset($_POST['filter_button']) != '') 
-  {
-    if ($_SESSION['filter'] == "usuario")
-    {
-      $_SESSION['filter'] = "nome";
-      $filtro = $_SESSION['filter'];
-    }
-    else
-    {
-      $_SESSION['filter'] = "usuario";
-      $filtro = $_SESSION['filter'];
-    }  
-  }
-  else {
-    if ($_SESSION['filter'] != "nome")
-    {
-      $_SESSION['filter'] = "usuario"; // Salva na sessão o filtro padrão "usuario"
-    }
-    $filtro = $_SESSION['filter'];
-  }
-
-  echo "<p style=\"color: black\">{$filtro}</p>";
-
   if(isset($_POST['search-user']) != '') 
   {
-    $sql = "SELECT * FROM tb_usuarios WHERE $filtro LIKE '{$_POST['search-user']}%' ORDER BY $filtro ASC";
+    $sql = "SELECT * FROM tb_usuarios WHERE usuario LIKE '{$_POST['search-user']}%' ORDER BY usuario ASC";
     $result = mysqli_query($conn, $sql);
-    $_SESSION['search-query'] = $_POST['search-user'];
   } 
   else 
   {
-    if ($_SESSION['search-query'] == '')
-    {
-      $sql = "SELECT * FROM tb_usuarios ORDER BY nome ASC";
-      $result = mysqli_query($conn, $sql);
-    }
-    else
-    {
-      $sql = "SELECT * FROM tb_usuarios WHERE $filtro LIKE '{$_SESSION['search-query']}%' ORDER BY $filtro ASC";
-      $result = mysqli_query($conn, $sql);
-    }
+    $sql = "SELECT * FROM tb_usuarios ORDER BY nome ASC";
+    $result = mysqli_query($conn, $sql);
   }
 
 ?>
@@ -59,30 +24,24 @@
   <link rel="stylesheet" href="styles/listagem.css">
 </head>
 <main>
-
   <div class="search-div">
+    <form name="search-form" method="POST">
+      <input type="text" name="search-user" placeholder="Pesquisar" value="<?php echo $_POST['search-user'] ?>">
+      <input type="submit" value="" class="search-button">
 
-    <div class="search-bar">
-      <form name="search-form" method="POST">
-        <div class="search-icon">
-          <i class="fa-solid fa-magnifying-glass"></i>
-          <input type="submit" value="">
-        </div>
-
-        <div class="search-input">
-          <input type="text" name="search-user" placeholder="Pesquisar" value="<?php echo $_SESSION['search-query'] ?>">
-        </div>
-      </form>
-    </div>
-
-    <div class="search-buttons">
-      <form class="filter-form" method="POST">
-        <div class="inputIcon-div">
-          <i class="fa-solid fa-filter"></i>
-          <input type="submit" name="filter_button" value=".">  
-        </div>
-      </form>
-    </div>
+      <label>Cargo</label>
+        <select name="txt-cargo">
+            <option value="Admin">Administrador</option>
+            <option value="Analista de Projetos">Analista de Projetos</option>
+            <option value="Gerente de Projetos">Gerente de Projetos</option>
+            <option value="Analista de Suporte">Analista de Suporte</option>
+            <option value="Programador Junior">Programador Junior</option>
+            <option value="Analista de Sistemas">Analista de Sistemas</option>
+        </select>
+    </form>
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <i class="fa-solid fa-school"></i>
+    
   </div>
 
   <div class="card-div">

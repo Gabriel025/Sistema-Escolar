@@ -9,48 +9,118 @@ main {
   /* background-color: green; */
 }
 
+
 .search-div {
   display: flex;
-  margin-top: 50px;
+  margin-top: 20px;
   margin-left: 50px;
-  /* background-color: green; */
+  height: 50px;
+/*   background-color: green; */
 }
 
-.search-div input:first-child {
-  width: 1172px;
-  height: 35px;
-  border-top-right-radius: 0;
-  border-top-left-radius: 0;
+.search-bar {
+  width: 73.6%;
+  height: 50px;
+  border: 1px solid black;
   border-radius: 5px;
-  box-shadow: 5px 5px 18px #888888;
+/*   background-color: blueviolet; */
+}
+
+.search-bar form {
+  display: flex;
+  align-items: center;
+  /* background-color: red; */
+}
+
+.search-bar input {
   color: black;
 }
 
-.search-div input:nth-child(2) {
-  margin-left: -45px;
-  width: 40px;
-  height: 38px;
-  border: none;
-  border-radius: 5px;
-  background-color: white;
-  /* background-color: green; */
-  color: black;
-}
-
-.search-div input:nth-child(2):hover {
-  cursor: pointer;
-}
-
-.search-div i {
+.search-icon {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-left: -34px;
+  width: 60px;
+  height: 50px;
+}
+
+.search-icon i {
+  position: fixed;
   font-size: 24px;
   color: black;
-  /* background-color: blue; */
-  pointer-events: none; /* Faz com que o mouse interaja com o que está embaixo desse elemento */
+  pointer-events: none;
 }
+
+.search-icon input{
+  width: 100%;
+  height: 100%;
+  border: none;
+  border-radius: 5px;
+  background-color: white;
+}
+
+.search-icon input:hover {
+  cursor: pointer;
+}
+
+.search-input {
+  width: 100%;
+  height: 50px;
+  /* background-color: black; */
+}
+
+.search-input input {
+  width: 99.50%;
+  height: 48px;
+  border: none;
+  border-radius: 5px;
+  border-left: 1px solid gray;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  outline: none;
+}
+
+.search-buttons {
+  display: flex;
+  align-items: center;
+  height: 100%;
+/*   background-color: orange; */
+}
+
+.filter-form {
+  /* background-color: red; */
+  margin-left: 25px;
+}
+
+.inputIcon-div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 25px;
+  height: 25px;
+  /* background-color: yellow; */
+}
+
+.inputIcon-div input {
+  width: 100%;
+  height: 100%;
+  border: none;
+  background-color: transparent;
+}
+
+.inputIcon-div input:hover {
+  cursor: pointer;
+}
+
+.search-buttons i {
+  position: fixed;
+  font-size: 18px;
+  color: black;
+  pointer-events: none;
+}
+
+
+/* --------- CARDS ----------- */
 
 .card-div {
   overflow: auto;
