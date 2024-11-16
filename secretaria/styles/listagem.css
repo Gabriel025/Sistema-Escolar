@@ -169,10 +169,9 @@ main {
 
 .right-part {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-evenly;
   align-items: center;
-  margin-right: 25px;
-  width: 80px;
+  width: 120px;
   /* background-color: blue; */
 }
 
