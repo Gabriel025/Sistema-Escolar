@@ -6,7 +6,7 @@
   session_start();
 
   // Atribuindo $usuario o valor que foi inserido no login.
-  $usuario = $_SESSION['usuario-login'];
+  $usuario_logado = $_SESSION['usuario-login'];
 
   // O sistema de roteação de páginas através do método GET.
   if (isset($_GET['pagina'])) {
@@ -32,14 +32,14 @@
               echo "Usuário: ";
               echo "<span>"; // Serve para mudar a cor do que vem a seguir
               // Caso o nome do úsuario for maior que 12 caracteres, será printado somente as 12 primeiras letras de seu nome de usuário.
-              if(strlen($usuario) > 12) {
+              if(strlen($usuario_logado) > 12) {
                 for ($i = 0; $i < 10; $i++) {
-                  echo "{$usuario[$i]}";
+                  echo "{$usuario_logado[$i]}";
                 }
                 echo "...";
               }
               else {
-                echo "{$usuario}";
+                echo "{$usuario_logado}";
               }
               echo "</span>";
             ?>
