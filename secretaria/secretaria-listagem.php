@@ -38,8 +38,8 @@
   if(isset($_POST['search-user']) != '') 
   {
     // Query sql para procrurar na tabela usuários, baseado no filtro selecionado
-    $sql = "SELECT * FROM tb_usuarios WHERE $filter LIKE '{$_POST['search-user']}%' ORDER BY $filter ASC";
-    $result = mysqli_query($conn, $sql);
+    $search = "SELECT * FROM tb_usuarios WHERE $filter LIKE '{$_POST['search-user']}%' ORDER BY $filter ASC";
+    $search_result = mysqli_query($conn, $search);
 
     // Salvando numa sessão local o que o usuário pesquisou.
     $_SESSION['search-query'] = $_POST['search-user'];
@@ -51,16 +51,249 @@
     if ($_SESSION['search-query'] == '')
     {
       // Por padrão mostra todos os usuários em ordem alfabética do filtro.
-      $sql = "SELECT * FROM tb_usuarios ORDER BY $filter ASC";
-      $result = mysqli_query($conn, $sql);
+      $search = "SELECT * FROM tb_usuarios ORDER BY $filter ASC";
+      $search_result = mysqli_query($conn, $search);
     }
     // Caso a variável de sessão "search-query" não estiver vazia, isso significa que o filtro foi pressionado, porém ainda tem informação na barra de pesquisa.
     else
     {
       // Mostra todos os usuários/nomes que começam com o que foi digitado na barra de pesquisa
-      $sql = "SELECT * FROM tb_usuarios WHERE $filter LIKE '{$_SESSION['search-query']}%' ORDER BY $filter ASC";
-      $result = mysqli_query($conn, $sql);
+      $search = "SELECT * FROM tb_usuarios WHERE $filter LIKE '{$_SESSION['search-query']}%' ORDER BY $filter ASC";
+      $search_result = mysqli_query($conn, $search);
     }
+  }
+
+  if (isset($_GET['create']) == "new_user")
+  {
+    $create_shard = $_GET['create'];
+  }
+  else if (isset($_GET['create_turma']) == "turma")
+  {
+    $create_turma = $_GET['create_turma'];
+  }
+
+  if(isset($_POST ["txt-usuario"]) != '') 
+  {
+    // Declarando Variáveis.
+    $usuario = $_POST ["txt-usuario"];
+    $senha = $_POST ["txt-senha"];
+    $nome = $_POST ["txt-nome"];
+    $divisao = $_POST ["txt-divisao"];
+    
+    $sql = "SELECT * FROM tb_usuarios WHERE usuario = '$usuario'";
+    $result = mysqli_query($conn, $sql);
+
+    if ("$usuario" == "$senha")
+    {
+        $usuario_error = true;
+    }
+
+    if (mysqli_num_rows($result) > 0) 
+    {  
+        $error = true;
+    }
+    else 
+    {
+        if ($divisao == "aluno" && $error == false && $usuario_error == false) {
+
+          $_SESSION['usuario-valor'] = $usuario;
+          $_SESSION['senha-valor'] = $senha;
+          $_SESSION['divisao-valor'] = $divisao;
+          $_SESSION['nome-valor'] = $nome;
+
+          header("Location: secretaria.php?pagina=secretaria-listagem&create_turma=turma");
+        }
+        else if($divisao == "professor" && $error == false && $usuario_error == false) {
+          $sql = ("INSERT INTO tb_usuarios VALUES ('$usuario','$senha','$divisao', '$nome')");
+          mysqli_query($conn, $sql);
+
+          $sql = ("INSERT INTO tb_professor VALUES ('$usuario', NULL)");
+          mysqli_query($conn, $sql);
+
+          header("Location: secretaria.php?pagina=secretaria-listagem");
+        }
+        else if($divisao == "secretaria" && $error == false && $usuario_error == false) {
+          $sql = ("INSERT INTO tb_usuarios VALUES ('$usuario','$senha','$divisao', '$nome')");
+          mysqli_query($conn, $sql);
+
+          $sql = ("INSERT INTO tb_secretaria VALUES ('$usuario', NULL)");
+          mysqli_query($conn, $sql);
+
+          header("Location: secretaria.php?pagina=secretaria-listagem");
+        }
+    }
+  }
+
+  if (isset($_POST['txt-turma'])) 
+  {
+    $usuario_antigo = $_SESSION['usuario_antigo'];
+
+    $usuario = $_SESSION['usuario-valor'];
+    $senha = $_SESSION['senha-valor'];
+    $divisao = $_SESSION['divisao-valor'];
+    $nome = $_SESSION['nome-valor'];
+
+    $turma = $_POST['txt-turma'];
+
+    if ($_SESSION['editar-valor'] == $usuario_antigo && $_SESSION['usuario_antigo'] != '') // Editando Usuário Já existente
+    {
+
+      if ($_SESSION['divisao_antigo'] == "secretaria")
+      {
+        $sql = ("DELETE FROM tb_secretaria WHERE usuario = '$usuario_antigo'");
+        mysqli_query($conn, $sql);
+      }
+      else if ($_SESSION['divisao_antigo'] == "professor")
+      {
+        $sql = ("DELETE FROM tb_professor WHERE usuario = '$usuario_antigo'");
+        mysqli_query($conn, $sql);
+      }
+      else
+      {
+        $sql = ("DELETE FROM tb_aluno WHERE usuario = '$usuario_antigo'");
+        mysqli_query($conn, $sql);
+      }
+
+      $sql = ("UPDATE tb_usuarios SET usuario = '$usuario', senha = '$senha', divisao = '$divisao', nome = '$nome' WHERE usuario = '$usuario_antigo'");
+      mysqli_query($conn, $sql);
+
+      $sql = ("INSERT INTO tb_aluno VALUES ('$usuario', '$turma')");
+      mysqli_query($conn, $sql);
+    }
+    else
+    {
+      $sql = ("INSERT INTO tb_usuarios VALUES ('$usuario','$senha','$divisao', '$nome')"); // Criando novo Aluno
+      mysqli_query($conn, $sql);
+
+      $sql = ("INSERT INTO tb_aluno VALUES ('$usuario','$turma')");
+      mysqli_query($conn, $sql);
+    }
+
+    if($_SESSION['shard-card'] == $usuario_antigo)
+    {
+      $_SESSION['shard-card'] = $usuario;
+    }
+
+        
+
+    $_SESSION['usuario_antigo'] = '';
+
+    header("Location: secretaria.php?pagina=secretaria-listagem&shard_card={$_SESSION['shard-card']}");
+  }
+
+  if (isset($_GET['edit']))
+  {
+    $edit_shard = $_GET['edit'];
+  }
+
+  if(isset($_POST ["new-usuario"]) != '') 
+  {
+    $usuario_antigo = $_SESSION['usuario_antigo'];
+
+    $divisao_antigo = $_SESSION['divisao_antigo'];
+
+    // Declarando Variáveis.
+    $usuario = $_POST ["new-usuario"];
+    $senha = $_POST ["new-senha"];
+    $nome = $_POST ["new-nome"];
+    $divisao = $_POST ["new-divisao"];
+    
+    $sql = "SELECT * FROM tb_usuarios WHERE usuario = '$usuario'";
+    $result = mysqli_query($conn, $sql);
+
+    if ("$usuario" == "$senha") 
+    {
+        $usuario_error = true;
+    }
+
+    if (mysqli_num_rows($result) > 0) 
+    {
+      while ($row = mysqli_fetch_assoc($result))
+      {
+        $check = $row["usuario"];
+      }
+      if ($usuario_antigo != $check)
+      {
+        $error = true;
+      }
+    }
+
+      if ($divisao == "aluno" && $error == false && $usuario_error == false) 
+      {
+        $_SESSION['usuario-valor'] = $usuario;
+        $_SESSION['senha-valor'] = $senha;
+        $_SESSION['divisao-valor'] = $divisao;
+        $_SESSION['nome-valor'] = $nome;
+
+        $_SESSION['editar-valor'] = $usuario_antigo;
+
+        header("Location: secretaria.php?pagina=secretaria-listagem&create_turma=turma");
+      }
+      else if ($divisao == "professor" && $error == false && $usuario_error == false) 
+      {
+
+        if ($_SESSION['divisao_antigo'] == "secretaria")
+        {
+          $sql = ("DELETE FROM tb_secretaria WHERE usuario = '$usuario_antigo'");
+          mysqli_query($conn, $sql);
+        }
+        else if ($_SESSION['divisao_antigo'] == "professor")
+        {
+          $sql = ("DELETE FROM tb_professor WHERE usuario = '$usuario_antigo'");
+          mysqli_query($conn, $sql);
+        }
+        else
+        {
+          $sql = ("DELETE FROM tb_aluno WHERE usuario = '$usuario_antigo'");
+          mysqli_query($conn, $sql);
+        }
+
+
+        $sql = ("UPDATE tb_usuarios SET usuario = '$usuario', senha = '$senha', divisao = '$divisao', nome = '$nome' WHERE usuario = '$usuario_antigo'");
+        mysqli_query($conn, $sql);
+
+        $sql = ("INSERT INTO tb_professor VALUES ('$usuario', NULL)");
+        mysqli_query($conn, $sql);
+
+        if($_SESSION['shard-card'] == $usuario_antigo)
+        {
+          $_SESSION['shard-card'] = $usuario;
+        }
+
+        header("Location: secretaria.php?pagina=secretaria-listagem&shard_card={$_SESSION['shard-card']}");
+      }
+      else if ($divisao == "secretaria" && $error == false && $usuario_error == false)
+      {
+        if ($_SESSION['divisao_antigo'] == "secretaria")
+        {
+          $sql = ("DELETE FROM tb_secretaria WHERE usuario = '$usuario_antigo'");
+          mysqli_query($conn, $sql);
+        }
+        else if ($_SESSION['divisao_antigo'] == "professor")
+        {
+          $sql = ("DELETE FROM tb_professor WHERE usuario = '$usuario_antigo'");
+          mysqli_query($conn, $sql);
+        }
+        else
+        {
+          $sql = ("DELETE FROM tb_aluno WHERE usuario = '$usuario_antigo'");
+          mysqli_query($conn, $sql);
+        }
+
+        $sql = ("UPDATE tb_usuarios SET usuario = '$usuario', senha = '$senha', divisao = '$divisao', nome = '$nome' WHERE usuario = '$usuario_antigo'");
+        mysqli_query($conn, $sql);
+
+        $sql = ("INSERT INTO tb_secretaria VALUES ('$usuario', NULL)");
+        mysqli_query($conn, $sql);
+        
+
+        if($_SESSION['shard-card'] == $usuario_antigo)
+        {
+          $_SESSION['shard-card'] = $usuario;
+        }
+
+        header("Location: secretaria.php?pagina=secretaria-listagem&shard_card={$_SESSION['shard-card']}");
+      }
   }
 
   if (isset($_GET['delete'])) 
@@ -83,15 +316,14 @@
     $sql = "DELETE FROM tb_usuarios WHERE usuario = '{$_GET['delete_shard']}'";
     mysqli_query($conn, $sql);
 
-    $deleted_user = $_SESSION['card_usuario'];
-
-    if ($deleted_user == $_GET['delete_shard']) // Caso o usuário no card for o mesmo que estamos excluíndo
+    if ($_SESSION['shard-card'] == $_GET['delete_shard']) // Caso o usuário no card for o mesmo que estamos excluíndo
     {
+      $_SESSION['shard-card'] = '';
       header("Location: secretaria.php?pagina=secretaria-listagem"); // Volta o card para o padrão (O primeiro na lista).
     }
     else
     {
-      header("Location: secretaria.php?pagina=secretaria-listagem&shard_card={$deleted_user}");
+      header("Location: secretaria.php?pagina=secretaria-listagem&shard_card={$_SESSION['shard-card']}");
     }
   }
 ?>
@@ -106,6 +338,24 @@
   <link rel="stylesheet" href="styles/listagem.css">
 
   <script>
+        $(document).ready(function() {
+            <?php if ($create_shard): ?>
+                $('#createModal').modal('show');
+            <?php endif; ?>
+        });
+
+        $(document).ready(function() {
+            <?php if ($create_turma): ?>
+                $('#turmaModal').modal('show');
+            <?php endif; ?>
+        });
+
+        $(document).ready(function() {
+            <?php if ($edit_shard): ?>
+                $('#editModal').modal('show');
+            <?php endif; ?>
+        });
+
         $(document).ready(function() {
             <?php if ($delete_shard): ?>
                 $('#deleteModal').modal('show');
@@ -140,7 +390,9 @@
 
         <div class="button-create-div">
           <p>Criar Usuário</p>
-          <i class="fa-solid fa-user-plus"></i>
+          <a href='secretaria.php?pagina=secretaria-listagem&create=new_user'>
+            <i class="fa-solid fa-user-plus"></i>
+          </a>
         </div>
       </div>
     </div>
@@ -148,9 +400,9 @@
     <div class="bottomside-div">
       <div class="shard-div">
         <?php
-          if (mysqli_num_rows($result) > 0)
+          if (mysqli_num_rows($search_result) > 0)
           {
-            while ($row = mysqli_fetch_assoc($result))
+            while ($row = mysqli_fetch_assoc($search_result))
             {
 
               if ($row["divisao"] == "aluno")
@@ -175,7 +427,7 @@
                 $string = "Cargo: {$funcao_row["cargo"]}";
               }
 
-              if (isset($_GET['shard_card'])) {
+              if (isset($_GET['shard_card']) != '') {
                 $shard_card = $_GET['shard_card'];
                 $_SESSION['shard-card'] = $shard_card;
               }
@@ -213,7 +465,7 @@
                   </a>
 
                   <div class='shard-buttons'>
-                    <a>
+                    <a href='secretaria.php?pagina=secretaria-listagem&shard_card={$shard_card}&edit={$row["usuario"]}'>
                       <i class='fa-solid fa-pen-to-square'></i>
                     </a>
 
@@ -238,8 +490,6 @@
           <div class="shard-card-info">
             <?php
               $card_usuario = $shard_card;
-
-              $_SESSION['card_usuario'] = $card_usuario;
 
               $sql = "SELECT * FROM tb_usuarios WHERE usuario LIKE '{$card_usuario}'";
               $result = mysqli_query($conn, $sql);
@@ -306,7 +556,9 @@
           </div>
 
           <div class="shard-card-buttons">
-            <i class='fa-solid fa-pen-to-square'></i>
+            <a href='secretaria.php?pagina=secretaria-listagem&shard_card=<?php echo "$card_usuario"; ?>&edit=<?php echo "{$card_usuario}"; ?>'>
+              <i class='fa-solid fa-pen-to-square'></i>
+            </a>
             <a href='secretaria.php?pagina=secretaria-listagem&shard_card=<?php echo "$card_usuario"; ?>&delete=<?php echo "{$card_usuario}"; ?>'>
               <i class='fa-solid fa-trash'></i>
             </a>
@@ -318,7 +570,193 @@
 
   <!-- POP UPS DA PAGINA -->
 
-    <!-- Pop Up Deletar -->
+  <!-- Pop Up Criar Usuário -->
+  <div class="modal" id="createModal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">Novo Usuário</h4>
+          <a href="secretaria.php?pagina=secretaria-listagem&shard_card=<?php echo "{$card_usuario}"; ?>" class="btn-close" ></a>
+        </div>
+
+        <!-- Modal body -->
+        <div class="modal-body">
+            <div class="logo-div">
+              <img src="../imagens/logo-alt.png" alt="Logo">
+            </div>
+          <form method="POST">
+            <div class="flex-div">
+              <label> Nome Completo </label>
+              <input type="text" name="txt-nome"  value="<?php echo "{$nome}"; ?>" maxlength="60" required="yes">
+            </div>
+
+            <div class="flex-div">
+              <label> Usuário </label>
+              <input type="text" name="txt-usuario"   value="<?php echo "{$usuario}"; ?>" maxlength="30" required="yes">
+            </div>
+
+            <div class="flex-div">
+              <label> Senha </label>
+              <input type="password" name="txt-senha"   value="<?php echo "{$senha}"; ?>" maxlength="30" required="yes">
+            </div>
+
+            <div class="flex-div">
+              <label> Divisão </label>
+              <select name="txt-divisao"  value="<?php echo "{$divisao}"; ?>">
+                <option value="aluno">aluno</option>
+                <option value="professor">professor</option>
+                <option value="secretaria">secretaria</option>
+              </select>
+            </div>
+
+            <div class="div-error">
+              <?php 
+                if($error == true) {
+                  echo "<p> Esse usuário já existe </p>";
+                }
+                else if($usuario_error == true) {
+                  echo "<p> O usuário e a senha não podem ser iguais </p>";
+                }
+              ?>
+            </div>
+
+            <input type="submit" value="Confirmar" class="btn btn-success">
+          </form>
+        </div>
+
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <a href="secretaria.php?pagina=secretaria-listagem&shard_card=<?php echo "{$card_usuario}"; ?>" class="btn btn-danger">Sair</a>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Pop Up Escolha de Turma -->
+  <div class="modal" id="turmaModal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">Selecione Uma Turma <?php echo "{$usuario}"; ?></h4>
+          <a href="secretaria.php?pagina=secretaria-listagem&shard_card=<?php echo "{$card_usuario}"; ?>" class="btn-close" ></a>
+        </div>
+
+        <!-- Modal body -->
+        <div class="modal-body">
+            <div class="logo-div">
+              <img src="../imagens/logo-alt.png" alt="Logo">
+            </div>
+          <form method="POST" name="form_turma" class="form-turma">
+            <div class="turma-grid">
+              <input type="submit" name="txt-turma" value="A1">
+              <input type="submit" name="txt-turma" value="B2">
+              <input type="submit" name="txt-turma" value="C3">
+              <input type="submit" name="txt-turma" value="D4">
+            </div>
+          </form>
+        </div>
+
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <a href="secretaria.php?pagina=secretaria-listagem&shard_card=<?php echo "{$card_usuario}"; ?>" class="btn btn-danger">Sair</a>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Pop Up Editar Usuário -->
+  <div class="modal" id="editModal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+
+      <?php
+        $sql = "SELECT * FROM tb_usuarios WHERE usuario = '{$_GET["edit"]}'";
+        $result = mysqli_query($conn, $sql);
+
+        if (mysqli_num_rows($result) > 0)
+          {
+            while ($row = mysqli_fetch_assoc($result))
+            {
+              $usuario = $row["usuario"];
+              $senha = $row["senha"];
+              $divisao = $row["divisao"];
+              $nome = $row["nome"];
+            }
+
+            $_SESSION['usuario_antigo'] = $usuario;
+            $_SESSION['divisao_antigo'] = $divisao;
+          }
+           
+      ?>
+
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">Editar Usuário</h4>
+          
+          <a href="secretaria.php?pagina=secretaria-listagem&shard_card=<?php echo "{$card_usuario}"; ?>" class="btn-close" ></a>
+        </div>
+
+        <!-- Modal body -->
+        <div class="modal-body">
+            <div class="logo-div">
+              <img src="../imagens/logo-alt.png" alt="Logo">
+            </div>
+          <form method="POST">
+            <div class="flex-div">
+              <label> Nome Completo </label>
+              <input type="text" name="new-nome"  value="<?php echo "{$nome}"; ?>" maxlength="60" required="yes">
+            </div>
+
+            <div class="flex-div">
+              <label> Usuário </label>
+              <input type="text" name="new-usuario"   value="<?php echo "{$usuario}"; ?>" maxlength="30" required="yes">
+            </div>
+
+            <div class="flex-div">
+              <label> Senha </label>
+              <input type="password" name="new-senha" value="<?php echo "{$senha}"; ?>" maxlength="30" required="yes">
+            </div>
+
+            <div class="flex-div">
+              <label> Divisão </label>
+              <select name="new-divisao"  value="<?php echo "{$divisao}"; ?>">
+                <option value="aluno">aluno</option>
+                <option value="professor">professor</option>
+                <option value="secretaria">secretaria</option>
+              </select>
+            </div>
+
+            <div class="div-error">
+              <?php 
+                if($error == true) {
+                  echo "<p> Esse usuário já existe </p>";
+                }
+                else if($usuario_error == true) {
+                  echo "<p> O usuário e a senha não podem ser iguais </p>";
+                }
+              ?>
+            </div>
+
+            <input type="submit" value="Confirmar" class="btn btn-success">
+          </form>
+        </div>
+
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <a href="secretaria.php?pagina=secretaria-listagem&shard_card=<?php echo "{$card_usuario}"; ?>" class="btn btn-danger">Sair</a>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Pop Up Deletar -->
   <div class="modal" id="deleteModal">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -345,5 +783,6 @@
       </div>
     </div>
   </div>
+
 </main>
 </html>

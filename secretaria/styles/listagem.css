@@ -81,6 +81,10 @@ main {
   /* background-color: blue; */
 }
 
+.buttons-div a {
+  text-decoration: none;
+}
+
 .buttons-div i {
   display: flex;
   justify-content: center;
@@ -88,6 +92,7 @@ main {
   width: 25px;
   height: 25px;
   font-size: 18px;
+  color: black;
   /* background-color: green; */
 }
 
@@ -289,4 +294,114 @@ main {
 .shard-card-buttons i {
   font-size: 30px;
   color: white;
+}
+
+
+/* MODAL */
+
+.modal-header {
+  background-color: #58498b;
+  color: white;
+}
+
+.btn-close {
+  background-color: white;
+}
+
+.modal-body form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 500px;
+  /* background-color: red; */
+}
+
+.logo-div {
+  margin-bottom: 30px;
+  display: flex;
+  justify-content: center;
+}
+
+.logo-div img {
+  width: 125px;
+}
+
+.flex-div {
+  margin-bottom: 25px;
+  display: flex;
+  flex-direction: column;
+  width: 85%;
+  /* background-color: yellow; */
+}
+
+.flex-div label {
+  font-size: 20px;
+}
+
+.flex-div input {
+  height: 35px;
+  border: 1px solid black;
+  border-radius: 5px;
+}
+
+.flex-div select {
+  width: 120px;
+}
+
+.div-error {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50px;
+  width: 200px;
+ /*  background-color: black; */
+}
+
+.div-error p {
+  color: rgb(77, 76, 76);
+}
+
+.modal-body input:nth-child(6) {
+  margin-top: 30px;
+  height: 50px;
+  width: 400px;
+  font-size: 24px;
+}
+
+.form-turma {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* background-color: red; */
+}
+
+
+.turma-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 60px;
+  row-gap: 100px;
+  margin-top: 40px;
+}
+
+.turma-grid input {
+  width: 150px;
+  height: 100px;
+  border-radius: 10px;
+}
+
+.turma-grid input:nth-child(1) {
+  background-color: #8c4cf3;
+}
+
+.turma-grid input:nth-child(2) {
+  background-color: #4e42f5;
+}
+
+.turma-grid input:nth-child(3) {
+  background-color: #fabe3d;
+}
+
+.turma-grid input:nth-child(4) {
+  background-color: #45f75d;
 }
