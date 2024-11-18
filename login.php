@@ -38,7 +38,6 @@
       
       mysqli_close($conn);
       header("Location: {$divisao}/{$divisao}.php");
-
     }
 
     // Caso contrário significa que o usuário/senha estavam errados.

@@ -97,16 +97,6 @@
           </span>
         </a>
       </li>
-
-      <li class="side-item <?php if ($pagina == "secretaria-cadastro") {echo "active";} ?>">
-        <a href="secretaria.php?pagina=secretaria-cadastro">
-          <i class="fa-solid fa-clipboard-check"></i>
-          <span class="item-description">
-            Novo Úsuario
-          </span>
-        </a>
-      </li>
-
     </ul>
   </div>
   

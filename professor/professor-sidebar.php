@@ -88,7 +88,7 @@
         </a>
       </li>
 
-      <li class="side-item <?php if ($pagina == "professor-chamada") {echo "active";} ?>">
+      <li class="side-item <?php if ($pagina == "professor-chamada" || $pagina == "professor-chamada-lista") {echo "active";} ?>">
         <a href="professor.php?pagina=professor-chamada">
           <i class="fa-solid fa-clipboard-check"></i>
           <span class="item-description">
