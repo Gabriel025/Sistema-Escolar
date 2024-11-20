@@ -725,10 +725,38 @@
 
             <div class="flex-div">
               <label> Divisão </label>
-              <select name="new-divisao"  value="<?php echo "{$divisao}"; ?>">
-                <option value="aluno">aluno</option>
-                <option value="professor">professor</option>
-                <option value="secretaria">secretaria</option>
+              <select name="new-divisao">
+                <?php
+                  if ($divisao == "aluno")
+                  {
+                    echo 
+                    "
+                      <option value='aluno'>Aluno</option>
+                      <option value='professor'>Professor</option>
+                      <option value='secretaria'>secretaria</option>
+                    ";
+                  }
+                  else if ($divisao == "professor")
+                  {
+                    echo 
+                    "
+                      <option value='professor'>Professor</option>
+                      <option value='aluno'>Aluno</option>
+                      <option value='secretaria'>Secretaria</option>
+                    ";
+                  }
+                  else
+                  {
+                    echo 
+                    "
+                      <option value='secretaria'>Secretaria</option>
+                      <option value='professor'>Professor</option>
+                      <option value='aluno'>Aluno</option>
+                    ";
+                  }            
+                
+                ?>
+                
               </select>
             </div>
 

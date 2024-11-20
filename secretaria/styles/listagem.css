@@ -24,7 +24,6 @@ main {
   flex: 2.5;
   height: 50px;
   margin-right: 5px;
-  background-color: white;
 }
 
 .search-div form{
@@ -33,6 +32,7 @@ main {
   height: 100%;
   border: 1px solid black;
   border-radius: 5px;
+  background-color: white;
   /* background-color: aquamarine; */
 }
 
@@ -144,7 +144,7 @@ main {
 .shard-div {
   margin-right: 5px;
   flex: 2.5;
-  height: 95%;
+  height: 800px;
   /* background-color: orange; */
   overflow-y: scroll;
 }

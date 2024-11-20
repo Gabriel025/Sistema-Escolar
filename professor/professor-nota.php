@@ -3,9 +3,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Alocar Nota</title>
 </head>
-<body>
+<main>
   <p>
     Alocar Nota
   </p>
-</body>
+</main>
 
