@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Nov 12, 2024 at 08:54 PM
+-- Generation Time: Nov 21, 2024 at 02:57 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -39,8 +39,49 @@ CREATE TABLE `tb_aluno` (
 --
 
 INSERT INTO `tb_aluno` (`usuario`, `turma`) VALUES
-('alphonse_123', 'B2'),
-('aluno', 'A1');
+('aang', 'A1'),
+('alphonse', 'A1'),
+('aluno', 'A1'),
+('amanda', 'B2'),
+('ana', 'B2'),
+('andre', 'B2'),
+('andreia', 'B2'),
+('beatrice', 'A1'),
+('bruna', 'B2'),
+('Camila', 'B2'),
+('carlos', 'B2'),
+('daniel', 'B2'),
+('dustin', 'A1'),
+('edward', 'A1'),
+('eleven', 'A1'),
+('felipe', 'B2'),
+('fernanda', 'C3'),
+('greg', 'A1'),
+('gustavo', 'C3'),
+('isabela', 'C3'),
+('jesse', 'A1'),
+('joao', 'C3'),
+('jonathan', 'A1'),
+('juliana', 'C3'),
+('katara', 'A1'),
+('larissa', 'D4'),
+('leticia', 'D4'),
+('lucas', 'A1'),
+('lucas1', 'D4'),
+('marcela', 'D4'),
+('mariana', 'D4'),
+('max', 'A1'),
+('mike', 'A1'),
+('nancy', 'A1'),
+('pedro', 'D4'),
+('professor', 'C3'),
+('sokka', 'A1'),
+('steve', 'A1'),
+('toph', 'A1'),
+('will', 'A1'),
+('winry', 'A1'),
+('wirt', 'A1'),
+('zuko', 'A1');
 
 -- --------------------------------------------------------
 
@@ -58,6 +99,10 @@ CREATE TABLE `tb_professor` (
 --
 
 INSERT INTO `tb_professor` (`usuario`, `especializacao`) VALUES
+('heisenberg', NULL),
+('iroh', NULL),
+('izumi', NULL),
+('mustang', NULL),
 ('professor', NULL);
 
 -- --------------------------------------------------------
@@ -76,6 +121,7 @@ CREATE TABLE `tb_secretaria` (
 --
 
 INSERT INTO `tb_secretaria` (`usuario`, `cargo`) VALUES
+('gus', NULL),
 ('secretaria', NULL);
 
 -- --------------------------------------------------------
@@ -96,10 +142,55 @@ CREATE TABLE `tb_usuarios` (
 --
 
 INSERT INTO `tb_usuarios` (`usuario`, `senha`, `divisao`, `nome`) VALUES
-('alphonse_123', 'livingArmor123', 'aluno', 'Alphonse Elric'),
+('aang', 'theAvatar', 'aluno', 'Aang Airs'),
+('alphonse', 'livingArmor123', 'aluno', 'Alphonse Elric'),
 ('aluno', '123', 'aluno', 'Aluno Poggers'),
+('amanda', '123', 'aluno', 'Amanda Costa Santos'),
+('ana', '123', 'aluno', 'Ana LuÃ­sa Silva'),
+('andre', '123', 'aluno', 'AndrÃ© Luiz Ramos'),
+('andreia', '123', 'aluno', 'AndrÃ©ia Santos Silva'),
+('beatrice', 'realistBird', 'aluno', 'Beatrice Unknown'),
+('bruna', '123', 'aluno', 'Bruna Oliveira Silva'),
+('Camila', '123', 'aluno', 'Camila Rodrigues Alves'),
+('carlos', '123', 'aluno', 'Carlos Eduardo Almeida'),
+('daniel', '123', 'aluno', 'Daniel Silva Oliveira'),
+('dustin', '123', 'aluno', 'Dustin Henderson'),
+('edward', 'imTall', 'aluno', 'Edward Elric'),
+('eleven', '123', 'aluno', 'Eleven'),
+('felipe', '123', 'aluno', 'Felipe Martins lima'),
+('fernanda', '123', 'aluno', 'Fernanda Oliveira Rocha'),
+('greg', 'candyCamouflage', 'aluno', 'Greg Unknown'),
+('gus', 'friedChiken', 'secretaria', 'Gustavo Fring'),
+('gustavo', '123', 'aluno', 'Gustavo Santos Lima'),
+('heisenberg', 'bluePowder', 'professor', 'Walter White'),
+('iroh', 'goodTea', 'professor', 'Iroh Firemark'),
+('isabela', '123', 'aluno', 'Isabela Nunes Cardoso'),
+('izumi', 'briggsNemesis', 'professor', 'Izumi Curtis'),
+('jesse', 'justVibing', 'aluno', 'Jesse Pinkman'),
+('joao', '123', 'aluno', 'JoÃ£o Gabriel Mendes'),
+('jonathan', '123', 'aluno', 'Jonathan Byers'),
+('juliana', '123', 'aluno', 'Juliana Pereira Santos'),
+('katara', 'theWaterbender', 'aluno', 'Katara Waters'),
+('larissa', '123', 'aluno', 'Larissa Carvalho Pereira'),
+('leticia', '123', 'aluno', 'LetÃ­cia Silva GonÃ§alves'),
+('lucas', '123', 'aluno', 'Lucas Sinclair'),
+('lucas1', '123', 'aluno', 'Lucas Ferreira Costa'),
+('marcela', '123', 'aluno', 'Marcela Costa Lima'),
+('mariana', '123', 'aluno', 'Mariana Castro Barbosa'),
+('max', '123', 'aluno', 'Max Mayfield'),
+('mike', '123', 'aluno', 'Mike Wheeler'),
+('mustang', 'holyFire', 'professor', 'Roy Mustang'),
+('nancy', '123', 'aluno', 'Nancy Wheeler'),
+('pedro', '123', 'aluno', 'Pedro Ferreiro Astora'),
 ('professor', '123', 'professor', 'Professor Poggers'),
-('secretaria', '123', 'secretaria', 'Secretaria Poggers');
+('secretaria', '123', 'secretaria', 'Secretaria Poggers'),
+('sokka', 'greatFood', 'aluno', 'Sokka Waters'),
+('steve', '123', 'aluno', 'Steve Harrington'),
+('toph', 'iSee', 'aluno', 'Toph Rocksteady'),
+('will', 'notTheDemogorgonAgain', 'aluno', 'Will Byers'),
+('winry', 'mechanicalMastermind', 'aluno', 'Winry Rockbell'),
+('wirt', 'notKitty', 'aluno', 'Wirt Unknown'),
+('zuko', 'honor', 'aluno', 'Zuko Firemark');
 
 --
 -- Indexes for dumped tables
