@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Nov 21, 2024 at 02:57 AM
+-- Generation Time: Nov 25, 2024 at 10:30 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -86,6 +86,95 @@ INSERT INTO `tb_aluno` (`usuario`, `turma`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `tb_avisos`
+--
+
+CREATE TABLE `tb_avisos` (
+  `id_aviso` int(11) NOT NULL,
+  `titulo_aviso` varchar(60) NOT NULL,
+  `texto_aviso` varchar(1000) NOT NULL,
+  `data_aviso` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tb_medias`
+--
+
+CREATE TABLE `tb_medias` (
+  `usuario` varchar(30) NOT NULL,
+  `media1` decimal(3,1) NOT NULL,
+  `media2` decimal(3,1) NOT NULL,
+  `media3` decimal(3,1) NOT NULL,
+  `media4` decimal(3,1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tb_nota`
+--
+
+CREATE TABLE `tb_nota` (
+  `usuario` varchar(30) NOT NULL,
+  `p1` decimal(3,1) DEFAULT NULL,
+  `p2` decimal(3,1) DEFAULT NULL,
+  `trabalho` decimal(3,1) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Dumping data for table `tb_nota`
+--
+
+INSERT INTO `tb_nota` (`usuario`, `p1`, `p2`, `trabalho`) VALUES
+('aang', NULL, NULL, NULL),
+('alphonse', NULL, NULL, NULL),
+('aluno', NULL, NULL, NULL),
+('amanda', NULL, NULL, NULL),
+('ana', NULL, NULL, NULL),
+('andre', NULL, NULL, NULL),
+('andreia', NULL, NULL, NULL),
+('beatrice', NULL, NULL, NULL),
+('bruna', NULL, NULL, NULL),
+('Camila', NULL, NULL, NULL),
+('carlos', NULL, NULL, NULL),
+('daniel', NULL, NULL, NULL),
+('dustin', NULL, NULL, NULL),
+('edward', NULL, NULL, NULL),
+('eleven', NULL, NULL, NULL),
+('felipe', NULL, NULL, NULL),
+('fernanda', NULL, NULL, NULL),
+('greg', NULL, NULL, NULL),
+('gustavo', NULL, NULL, NULL),
+('isabela', NULL, NULL, NULL),
+('jesse', NULL, NULL, NULL),
+('joao', NULL, NULL, NULL),
+('jonathan', NULL, NULL, NULL),
+('juliana', NULL, NULL, NULL),
+('katara', NULL, NULL, NULL),
+('larissa', NULL, NULL, NULL),
+('leticia', NULL, NULL, NULL),
+('lucas', NULL, NULL, NULL),
+('lucas1', NULL, NULL, NULL),
+('marcela', NULL, NULL, NULL),
+('mariana', NULL, NULL, NULL),
+('max', NULL, NULL, NULL),
+('mike', NULL, NULL, NULL),
+('nancy', NULL, NULL, NULL),
+('pedro', NULL, NULL, NULL),
+('professor', NULL, NULL, NULL),
+('sokka', NULL, NULL, NULL),
+('steve', NULL, NULL, NULL),
+('toph', NULL, NULL, NULL),
+('will', NULL, NULL, NULL),
+('winry', NULL, NULL, NULL),
+('wirt', NULL, NULL, NULL),
+('zuko', NULL, NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `tb_professor`
 --
 
@@ -104,6 +193,24 @@ INSERT INTO `tb_professor` (`usuario`, `especializacao`) VALUES
 ('izumi', NULL),
 ('mustang', NULL),
 ('professor', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tb_rematricula`
+--
+
+CREATE TABLE `tb_rematricula` (
+  `data_abertura` date DEFAULT NULL,
+  `data_fechamento` date DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Dumping data for table `tb_rematricula`
+--
+
+INSERT INTO `tb_rematricula` (`data_abertura`, `data_fechamento`) VALUES
+('2024-11-25', '2024-11-27');
 
 -- --------------------------------------------------------
 
@@ -203,6 +310,18 @@ ALTER TABLE `tb_aluno`
   ADD UNIQUE KEY `usuario` (`usuario`) USING BTREE;
 
 --
+-- Indexes for table `tb_avisos`
+--
+ALTER TABLE `tb_avisos`
+  ADD PRIMARY KEY (`id_aviso`);
+
+--
+-- Indexes for table `tb_nota`
+--
+ALTER TABLE `tb_nota`
+  ADD KEY `usuario` (`usuario`);
+
+--
 -- Indexes for table `tb_professor`
 --
 ALTER TABLE `tb_professor`
@@ -228,19 +347,25 @@ ALTER TABLE `tb_usuarios`
 -- Constraints for table `tb_aluno`
 --
 ALTER TABLE `tb_aluno`
-  ADD CONSTRAINT `tb_aluno_ibfk_1` FOREIGN KEY (`usuario`) REFERENCES `tb_usuarios` (`usuario`);
+  ADD CONSTRAINT `tb_aluno_ibfk_1` FOREIGN KEY (`usuario`) REFERENCES `tb_usuarios` (`usuario`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `tb_nota`
+--
+ALTER TABLE `tb_nota`
+  ADD CONSTRAINT `tb_nota_ibfk_1` FOREIGN KEY (`usuario`) REFERENCES `tb_aluno` (`usuario`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `tb_professor`
 --
 ALTER TABLE `tb_professor`
-  ADD CONSTRAINT `tb_professor_ibfk_1` FOREIGN KEY (`usuario`) REFERENCES `tb_usuarios` (`usuario`);
+  ADD CONSTRAINT `tb_professor_ibfk_1` FOREIGN KEY (`usuario`) REFERENCES `tb_usuarios` (`usuario`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `tb_secretaria`
 --
 ALTER TABLE `tb_secretaria`
-  ADD CONSTRAINT `tb_secretaria_ibfk_1` FOREIGN KEY (`usuario`) REFERENCES `tb_usuarios` (`usuario`);
+  ADD CONSTRAINT `tb_secretaria_ibfk_1` FOREIGN KEY (`usuario`) REFERENCES `tb_usuarios` (`usuario`) ON DELETE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
