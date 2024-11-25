@@ -13,12 +13,13 @@
 
   $row = mysqli_fetch_row($result);
 
+
   // O sistema de roteação de páginas através do método GET.
   if (isset($_GET['pagina'])) {
     $pagina = $_GET['pagina'];
   }
   else {
-    $pagina = "avisos";
+    $pagina = "periodo-letivo";
   }
 ?>
 
@@ -77,7 +78,7 @@
         </a>
       </li>
 
-      <li class="side-item <?php if ($pagina == "aluno-rematricula") {echo "active";} ?>">
+      <li class="side-item <?php if ($pagina == "aluno-rematricula" || $pagina == "aluno-rematricula-erro") {echo "active";} ?>">
         <a href="aluno.php?pagina=aluno-rematricula">
           <i class="fa-solid fa-school"></i>
           <span class="item-description">

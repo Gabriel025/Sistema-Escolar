@@ -20,6 +20,7 @@
     if ($pagina == "avisos" || $pagina == "periodo-letivo") {
       // $pagina será trocado pelo nome do arquivo correto.
       include "../{$pagina}.php";
+      echo "<link rel='stylesheet' href='../styles/{$pagina}.css'>";
     }
     else {
       include "{$pagina}.php";

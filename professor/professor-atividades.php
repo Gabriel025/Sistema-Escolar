@@ -24,8 +24,26 @@
 
         <!-- FAZER O SELECT DA TURMA Q A ATIVIDADE VAI SER ENVIADA -->
 
-        <i class="fa-solid fa-paperclip"></i>
+        <div class="clip-area-div">
+          <div class="clip-div">
+            <i class="fa-solid fa-paperclip"></i>
+          </div>
 
+          <div class="turma-select-div">
+            <p>
+              Turma
+            </p>
+
+            <select name="txt-turma">
+              <option value="A1">A1</option>
+              <option value="B2">B2</option>
+              <option value="C3">C3</option>
+              <option value="D4">D4</option>
+            </select>
+          </div>
+          
+        </div>
+        
         <div class="data-div">
           <div>
             <p>Data de Abertura</p>
@@ -38,7 +56,7 @@
         </div>
 
         <div class="button-login">
-          <input type="submit" value="Entrar">
+          <input type="submit" value="Enviar">
         </div>
       </form>
     </div>

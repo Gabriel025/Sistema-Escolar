@@ -1,10 +1,16 @@
 <?php
   include "../database.php";
 
+  date_default_timezone_set("America/Sao_Paulo");
+
   $turma_chamada = $_GET["turma"];
 
   $sql = "SELECT * FROM tb_usuarios ORDER BY nome ASC";
   $result = mysqli_query($conn, $sql);
+
+  /* echo "Today is " . date("Y/m/d") . "<br>"; */
+
+  $data_atual = date("d/m/Y");
 
 ?>
 
@@ -17,7 +23,17 @@
 <main>
   <div class="main-content">
     <div class="topside-div">
+      <div class="topside-content">
+        <div class="chamada-botao">
+          <a href="professor.php?pagina=professor-chamada">
+            <i class="fa-solid fa-arrow-left"></i>
+          </a>
+        </div>
 
+        <div class="chamada-titulo">
+          <p><?php echo "Chamada | Data: {$data_atual}"; ?></p>
+        </div>
+      </div>
     </div>
 
     <div class="bottomside-div">
@@ -59,9 +75,11 @@
         </table>
 
         <div class="button-div">
-          <button>
-            Enviar
-          </button>
+          <a href="professor.php?pagina=professor-chamada">
+            <button>
+              Enviar
+            </button>
+          </a>
         </div>
       </div>
     </div>

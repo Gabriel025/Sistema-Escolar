@@ -167,6 +167,9 @@
 
       $sql = ("INSERT INTO tb_aluno VALUES ('$usuario','$turma')");
       mysqli_query($conn, $sql);
+
+      $sql = ("INSERT INTO tb_nota VALUES ('$usuario', NULL, NULL, NULL)");
+      mysqli_query($conn, $sql);
     }
 
     if($_SESSION['shard-card'] == $usuario_antigo)
@@ -302,17 +305,7 @@
   }
 
   if (isset($_GET['delete_shard'])) 
-  {
-    $sql = "DELETE FROM tb_aluno WHERE usuario = '{$_GET['delete_shard']}'";
-    /* $sql = "SELECT * FROM tb_usuarios WHERE usuario = '{$_GET['delete']}'"; */
-    mysqli_query($conn, $sql);
-
-    $sql = "DELETE FROM tb_professor WHERE usuario = '{$_GET['delete_shard']}'";
-    mysqli_query($conn, $sql);
-
-    $sql = "DELETE FROM tb_secretaria WHERE usuario = '{$_GET['delete_shard']}'";
-    mysqli_query($conn, $sql);
-    
+  { 
     $sql = "DELETE FROM tb_usuarios WHERE usuario = '{$_GET['delete_shard']}'";
     mysqli_query($conn, $sql);
 

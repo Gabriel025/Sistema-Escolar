@@ -13,7 +13,7 @@
     $pagina = $_GET['pagina'];
   }
   else {
-    $pagina = "avisos";
+    $pagina = "periodo-letivo";
   }
 ?>
 
@@ -67,15 +67,6 @@
           <i class="fa-solid fa-calendar"></i>
           <span class="item-description">
             Período Letivo
-          </span>
-        </a>
-      </li>
-
-      <li class="side-item <?php if ($pagina == "secretaria-avisos") {echo "active";} ?>">
-        <a href="secretaria.php?pagina=secretaria-avisos">
-          <i class="fa-solid fa-school"></i>
-          <span class="item-description">
-            Lançar Avisos
           </span>
         </a>
       </li>

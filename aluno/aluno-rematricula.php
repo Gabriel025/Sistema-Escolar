@@ -1,3 +1,29 @@
+<?php
+  include "../database.php";
+
+  date_default_timezone_set("America/Sao_Paulo");
+
+  $sql = "SELECT * FROM tb_rematricula";
+  $result = mysqli_query($conn, $sql);
+
+  while ($row = mysqli_fetch_assoc($result)) 
+  {
+    $time = strtotime($row["data_abertura"]);
+		$abertura = date('d/m/Y',$time);
+
+    $time = strtotime($row["data_fechamento"]);
+		$fechamento = date('d/m/Y',$time);
+
+    $data_atual = date("d/m/Y");
+
+    if ($data_atual < $abertura) {
+      header("Location: aluno.php?pagina=aluno-rematricula-erro");
+    }
+  }
+
+?>
+
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -93,6 +119,8 @@
     <input class="container" type="checkbox"/>
   </div>
 
-  <button class="confirnar-rematrcula-botao">Confirmar Rematrícula</button>
+  <a href="aluno.php?pagina=periodo-letivo">
+    <button class="confirnar-rematrcula-botao">Confirmar Rematrícula</button>
+  </a>
 
 </main> 

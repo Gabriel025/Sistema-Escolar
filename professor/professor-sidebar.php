@@ -13,7 +13,7 @@
     $pagina = $_GET['pagina'];
   }
   else {
-    $pagina = "avisos";
+    $pagina = "periodo-letivo";
   }
 ?>
 

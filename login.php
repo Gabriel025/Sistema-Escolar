@@ -32,6 +32,8 @@
 
       // salvando a divisão(cargo) do usuário que está logando
       $divisao = $row["divisao"];
+
+      $_SESSION['usuario-divisao'] = $divisao;
       
       // myqsli_close == fecha a conexão com o banco de dados.
       // header Location == Vai pra essa outra página.
