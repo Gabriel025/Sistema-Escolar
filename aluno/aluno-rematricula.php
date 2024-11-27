@@ -16,7 +16,7 @@
 
     $data_atual = date("d/m/Y");
 
-    if ($data_atual < $abertura) {
+    if ($data_atual < $abertura || $data_atual > $fechamento) {
       header("Location: aluno.php?pagina=aluno-rematricula-erro");
     }
   }

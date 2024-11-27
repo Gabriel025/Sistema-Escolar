@@ -1,3 +1,75 @@
 main {
-  
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  /* background-color: black; */
 }
+
+.avisos-title {
+    margin-top: -30px;
+    margin-bottom: 15px;
+}
+
+.avisos-div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 92%;
+    height: 850px;
+    /* background-color: aquamarine; */
+    overflow-y: auto;
+}
+
+.avisos-div a {
+    text-decoration: none;
+}
+
+.aviso-shard {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-top: 40px;
+    margin-bottom: 25px;
+    height: 85px;
+    width: 1400px;
+    border-radius: 10px;
+    background-color: #58498b;
+}
+
+.aviso-shard-title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50px;
+    /* background-color: yellow; */
+}
+
+.aviso-shard-title p {
+    margin: 0;
+    font-size: 24px;
+    color: white;
+}
+
+.aviso-shard-date {
+    height: 28px;
+    /* background-color: orangered; */
+    text-align: end;
+}
+
+.aviso-shard-date p {
+    color: rgb(187, 187, 187);
+    font-size: 18px;
+    font-style: italic;
+    margin-right: 10px;
+}
+
+.logo-div {
+    margin-bottom: 30px;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .logo-div img {
+    width: 125px;
+  }
