@@ -8,7 +8,22 @@
 <main>
   <div class="text-div"> 
     <p>
-      Não estamos em período de rematrícula
+      <?php
+        $usuario_rematriculado = $_SESSION['usuario-rematriculado'];
+
+        $usuario_logado = $_SESSION['usuario-login'];
+
+        if ($usuario_rematriculado == $usuario_logado)
+        {
+          echo "Sua Rematrícula Já Foi Realizada";
+        }
+        else 
+        {
+          echo "Não estamos em período de rematrícula";
+        }
+      
+      ?>
+      
     </p>
   </div>
 </main>

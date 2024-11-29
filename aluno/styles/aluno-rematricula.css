@@ -1,0 +1,59 @@
+main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.rematricula-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    width: 600px;
+    height: 350px;
+    border: 1px solid black;
+    border-radius: 5px;
+    background-color: white;
+    padding: 30px;
+    /* background-color: blue; */
+}
+
+.input-div {
+    display: flex;
+    flex-direction: column;
+}
+
+.input-div input {
+    margin-top: 5px;
+    margin-bottom: 10px;
+    height: 38px;
+    border-radius: 5px;
+    border: 1px solid black;
+}
+
+.rematricula-form p {
+    font-size: 14px;
+    color: #4e4ec7;
+}
+
+.rematricula-form button {
+    height: 35px;
+    width: 120px;
+    border: 1px solid black;
+    border-radius: 5px;
+    background-color: #58498b;
+    color: white;
+}
+
+.button-div {
+    height: 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    /* background-color: green; */
+}
+
+.button-div p{
+    margin: 0;
+    align-self: center;
+    color: rgb(102, 100, 100);
+}

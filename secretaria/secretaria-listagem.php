@@ -621,7 +621,7 @@
 
         <!-- Modal footer -->
         <div class="modal-footer">
-          <a href="secretaria.php?pagina=secretaria-listagem&shard_card=<?php echo "{$card_usuario}"; ?>" class="btn btn-danger">Sair</a>
+          <a href="secretaria.php?pagina=secretaria-listagem&shard_card=<?php echo "{$card_usuario}"; ?>" class="btn btn-danger">Cancelar</a>
         </div>
 
       </div>
@@ -656,7 +656,7 @@
 
         <!-- Modal footer -->
         <div class="modal-footer">
-          <a href="secretaria.php?pagina=secretaria-listagem&shard_card=<?php echo "{$card_usuario}"; ?>" class="btn btn-danger">Sair</a>
+          <a href="secretaria.php?pagina=secretaria-listagem&shard_card=<?php echo "{$card_usuario}"; ?>" class="btn btn-danger">Cancelar</a>
         </div>
 
       </div>
@@ -770,7 +770,7 @@
 
         <!-- Modal footer -->
         <div class="modal-footer">
-          <a href="secretaria.php?pagina=secretaria-listagem&shard_card=<?php echo "{$card_usuario}"; ?>" class="btn btn-danger">Sair</a>
+          <a href="secretaria.php?pagina=secretaria-listagem&shard_card=<?php echo "{$card_usuario}"; ?>" class="btn btn-danger">Cancelar</a>
         </div>
 
       </div>
@@ -798,7 +798,7 @@
         <!-- Modal footer -->
         <div class="modal-footer">
           <a href="secretaria.php?pagina=secretaria-listagem&delete_shard=<?php echo "{$delete_shard}"; ?>" type="button" class="btn btn-success"> Confirmar</a>
-          <a href="secretaria.php?pagina=secretaria-listagem&shard_card=<?php echo "{$card_usuario}"; ?>" class="btn btn-danger">Sair</a>
+          <a href="secretaria.php?pagina=secretaria-listagem&shard_card=<?php echo "{$card_usuario}"; ?>" class="btn btn-danger">Cancelar</a>
         </div>
 
       </div>

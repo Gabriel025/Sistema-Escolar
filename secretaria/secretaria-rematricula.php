@@ -4,39 +4,37 @@
 
 	date_default_timezone_set("America/Sao_Paulo");
 
-	if (isset($_POST["txt-abertura"]))
-	{
+	if (isset($_POST["txt-abertura"])) {
 		$abertura_str = $_POST["txt-abertura"];
-
 		$fechamento_str = $_POST["txt-fechamento"];
+		$data_atual_str = date("Y-m-d");
 
-		$time = strtotime($abertura_str);
-		$abertura = date('d/m/Y',$time);
+		// Cria objetos DateTime a partir das strings de data
+		$abertura = DateTime::createFromFormat('Y-m-d', $abertura_str);
+		$fechamento = DateTime::createFromFormat('Y-m-d', $fechamento_str);
+		$data_atual = DateTime::createFromFormat('Y-m-d', $data_atual_str);
 
-		$time = strtotime($fechamento_str);
-		$fechamento = date('d/m/Y',$time);
+		$data_erro = false;
 
-		
-
-		$data_atual = date("d/m/Y");
-
-		/* $data_atual = date("Y/m/d"); */
-
-		if ($abertura < $data_atual)
-		{
+		// Verifica se a data de abertura é menor que a data atual
+		if ($abertura < $data_atual) {
+			$data_erro = true;
+		} 
+		// Verifica se a data de fechamento é menor que a data atual
+		else if ($fechamento < $data_atual) {
+			$data_erro = true;
+		} 
+		// Verifica se a data de abertura é maior que a data de fechamento
+		else if ($abertura > $fechamento) {
 			$data_erro = true;
 		}
-		else if($fechamento < $data_atual)
-		{
-			$data_erro = true;
-		}
 
+		// Se não houver erro, atualiza os dados no banco de dados
 		if (!$data_erro) {
 			$sql = ("UPDATE tb_rematricula SET data_abertura = '$abertura_str', data_fechamento = '$fechamento_str'");
       		mysqli_query($conn, $sql);
 		}
 	}
-
 ?>
 
 <head>
@@ -56,11 +54,9 @@
 					</label>
 					<input type="date" name="txt-abertura" required="yes">
 
-
 					<label>
-						Data de fechamento da rematricula
+						Data de fechamento da rematrícula
 					</label>
-
 					<input type="date" name="txt-fechamento" required="yes">
 				</div>
 				
@@ -70,16 +66,15 @@
 					</button>
 					<p>
 						<?php
-						
-							if($abertura < $data_atual) 
-							{
-								echo "Escolha uma data de abertura válida";
+							if ($data_erro) {
+								if ($abertura < $data_atual) {
+									echo $abertura;
+									echo $data_atual;
+									echo "Escolha uma data de abertura válida.";
+								} else if ($fechamento < $abertura) {
+									echo "Escolha uma data de fechamento válida.";
+								}
 							}
-							else if($fechamento < $data_atual)
-							{
-								echo "Escolha uma data de fechamento válida";
-							}
-					
 						?>
 					</p>
 				</div>
