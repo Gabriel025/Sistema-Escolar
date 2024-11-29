@@ -68,8 +68,6 @@
 						<?php
 							if ($data_erro) {
 								if ($abertura < $data_atual) {
-									echo $abertura;
-									echo $data_atual;
 									echo "Escolha uma data de abertura válida.";
 								} else if ($fechamento < $abertura) {
 									echo "Escolha uma data de fechamento válida.";

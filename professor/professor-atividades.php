@@ -1,3 +1,10 @@
+<?php
+
+  if (isset($_POST[""]))
+
+
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -16,11 +23,11 @@
     </div>
       <form  class="form-login">
         <label>Título</label>
-        <input type="text"  value="" size="35" maxlength="30" required="yes">
+        <input type="text"  value="" size="35" maxlength="60" required="yes">
             
     
         <label>Descrição</label>
-        <input type="password"  value="" maxlength="30" required="yes">
+        <input type="text"  value="" maxlength="150" name="txt-descricao">
 
         <!-- FAZER O SELECT DA TURMA Q A ATIVIDADE VAI SER ENVIADA -->
 
@@ -47,11 +54,11 @@
         <div class="data-div">
           <div>
             <p>Data de Abertura</p>
-            <input type="date">
+            <input type="date" name="txt-abertura" required="yes">
           </div>
           <div>
             <p>Data de Fechamento</p>
-            <input type="date">
+            <input type="date" name="txt-fechamento" required="yes">
           </div>
         </div>
 

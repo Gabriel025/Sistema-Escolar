@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Nov 25, 2024 at 10:30 PM
+-- Generation Time: Nov 29, 2024 at 09:50 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -92,9 +92,16 @@ INSERT INTO `tb_aluno` (`usuario`, `turma`) VALUES
 CREATE TABLE `tb_avisos` (
   `id_aviso` int(11) NOT NULL,
   `titulo_aviso` varchar(60) NOT NULL,
-  `texto_aviso` varchar(1000) NOT NULL,
+  `texto_aviso` varchar(600) DEFAULT NULL,
   `data_aviso` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Dumping data for table `tb_avisos`
+--
+
+INSERT INTO `tb_avisos` (`id_aviso`, `titulo_aviso`, `texto_aviso`, `data_aviso`) VALUES
+(18, 'Teste', '\r\n\r\nLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\r\n\r\n\r\nLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et ', '2024-11-28');
 
 -- --------------------------------------------------------
 
@@ -128,14 +135,12 @@ CREATE TABLE `tb_nota` (
 --
 
 INSERT INTO `tb_nota` (`usuario`, `p1`, `p2`, `trabalho`) VALUES
-('aang', NULL, NULL, NULL),
 ('alphonse', NULL, NULL, NULL),
 ('aluno', NULL, NULL, NULL),
 ('amanda', NULL, NULL, NULL),
 ('ana', NULL, NULL, NULL),
 ('andre', NULL, NULL, NULL),
 ('andreia', NULL, NULL, NULL),
-('beatrice', NULL, NULL, NULL),
 ('bruna', NULL, NULL, NULL),
 ('Camila', NULL, NULL, NULL),
 ('carlos', NULL, NULL, NULL),
@@ -145,14 +150,12 @@ INSERT INTO `tb_nota` (`usuario`, `p1`, `p2`, `trabalho`) VALUES
 ('eleven', NULL, NULL, NULL),
 ('felipe', NULL, NULL, NULL),
 ('fernanda', NULL, NULL, NULL),
-('greg', NULL, NULL, NULL),
 ('gustavo', NULL, NULL, NULL),
 ('isabela', NULL, NULL, NULL),
 ('jesse', NULL, NULL, NULL),
 ('joao', NULL, NULL, NULL),
 ('jonathan', NULL, NULL, NULL),
 ('juliana', NULL, NULL, NULL),
-('katara', NULL, NULL, NULL),
 ('larissa', NULL, NULL, NULL),
 ('leticia', NULL, NULL, NULL),
 ('lucas', NULL, NULL, NULL),
@@ -164,13 +167,9 @@ INSERT INTO `tb_nota` (`usuario`, `p1`, `p2`, `trabalho`) VALUES
 ('nancy', NULL, NULL, NULL),
 ('pedro', NULL, NULL, NULL),
 ('professor', NULL, NULL, NULL),
-('sokka', NULL, NULL, NULL),
 ('steve', NULL, NULL, NULL),
-('toph', NULL, NULL, NULL),
 ('will', NULL, NULL, NULL),
-('winry', NULL, NULL, NULL),
-('wirt', NULL, NULL, NULL),
-('zuko', NULL, NULL, NULL);
+('winry', NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -210,7 +209,7 @@ CREATE TABLE `tb_rematricula` (
 --
 
 INSERT INTO `tb_rematricula` (`data_abertura`, `data_fechamento`) VALUES
-('2024-11-25', '2024-11-27');
+('2024-11-30', '2024-12-01');
 
 -- --------------------------------------------------------
 
@@ -249,14 +248,14 @@ CREATE TABLE `tb_usuarios` (
 --
 
 INSERT INTO `tb_usuarios` (`usuario`, `senha`, `divisao`, `nome`) VALUES
-('aang', 'theAvatar', 'aluno', 'Aang Airs'),
+('aang', 'theavatar', 'aluno', 'Aang'),
 ('alphonse', 'livingArmor123', 'aluno', 'Alphonse Elric'),
 ('aluno', '123', 'aluno', 'Aluno Poggers'),
 ('amanda', '123', 'aluno', 'Amanda Costa Santos'),
 ('ana', '123', 'aluno', 'Ana LuÃ­sa Silva'),
 ('andre', '123', 'aluno', 'AndrÃ© Luiz Ramos'),
 ('andreia', '123', 'aluno', 'AndrÃ©ia Santos Silva'),
-('beatrice', 'realistBird', 'aluno', 'Beatrice Unknown'),
+('beatrice', 'realistBird', 'aluno', 'Beatrice'),
 ('bruna', '123', 'aluno', 'Bruna Oliveira Silva'),
 ('Camila', '123', 'aluno', 'Camila Rodrigues Alves'),
 ('carlos', '123', 'aluno', 'Carlos Eduardo Almeida'),
@@ -266,18 +265,18 @@ INSERT INTO `tb_usuarios` (`usuario`, `senha`, `divisao`, `nome`) VALUES
 ('eleven', '123', 'aluno', 'Eleven'),
 ('felipe', '123', 'aluno', 'Felipe Martins lima'),
 ('fernanda', '123', 'aluno', 'Fernanda Oliveira Rocha'),
-('greg', 'candyCamouflage', 'aluno', 'Greg Unknown'),
+('greg', 'candyCamouflage', 'aluno', 'Greg'),
 ('gus', 'friedChiken', 'secretaria', 'Gustavo Fring'),
 ('gustavo', '123', 'aluno', 'Gustavo Santos Lima'),
 ('heisenberg', 'bluePowder', 'professor', 'Walter White'),
-('iroh', 'goodTea', 'professor', 'Iroh Firemark'),
+('iroh', 'goodTea', 'professor', 'Iroh'),
 ('isabela', '123', 'aluno', 'Isabela Nunes Cardoso'),
 ('izumi', 'briggsNemesis', 'professor', 'Izumi Curtis'),
 ('jesse', 'justVibing', 'aluno', 'Jesse Pinkman'),
 ('joao', '123', 'aluno', 'JoÃ£o Gabriel Mendes'),
 ('jonathan', '123', 'aluno', 'Jonathan Byers'),
 ('juliana', '123', 'aluno', 'Juliana Pereira Santos'),
-('katara', 'theWaterbender', 'aluno', 'Katara Waters'),
+('katara', 'theWaterbender', 'aluno', 'Katara'),
 ('larissa', '123', 'aluno', 'Larissa Carvalho Pereira'),
 ('leticia', '123', 'aluno', 'LetÃ­cia Silva GonÃ§alves'),
 ('lucas', '123', 'aluno', 'Lucas Sinclair'),
@@ -291,13 +290,13 @@ INSERT INTO `tb_usuarios` (`usuario`, `senha`, `divisao`, `nome`) VALUES
 ('pedro', '123', 'aluno', 'Pedro Ferreiro Astora'),
 ('professor', '123', 'professor', 'Professor Poggers'),
 ('secretaria', '123', 'secretaria', 'Secretaria Poggers'),
-('sokka', 'greatFood', 'aluno', 'Sokka Waters'),
+('sokka', 'greatFood', 'aluno', 'Sokka'),
 ('steve', '123', 'aluno', 'Steve Harrington'),
-('toph', 'iSee', 'aluno', 'Toph Rocksteady'),
+('toph', 'iSee', 'aluno', 'Toph'),
 ('will', 'notTheDemogorgonAgain', 'aluno', 'Will Byers'),
 ('winry', 'mechanicalMastermind', 'aluno', 'Winry Rockbell'),
-('wirt', 'notKitty', 'aluno', 'Wirt Unknown'),
-('zuko', 'honor', 'aluno', 'Zuko Firemark');
+('wirt', 'notKitty', 'aluno', 'Wirt'),
+('zuko', 'honor', 'aluno', 'Zuko');
 
 --
 -- Indexes for dumped tables
@@ -338,6 +337,16 @@ ALTER TABLE `tb_secretaria`
 --
 ALTER TABLE `tb_usuarios`
   ADD PRIMARY KEY (`usuario`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `tb_avisos`
+--
+ALTER TABLE `tb_avisos`
+  MODIFY `id_aviso` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- Constraints for dumped tables

@@ -41,7 +41,7 @@
         if ($row["nome"] == $nome)
         {
           $_SESSION['usuario-rematriculado'] = $usuario;
-          header("Location: aluno.php?pagina=avisos");
+          header("Location: aluno.php?pagina=aluno-rematricula-erro");
         }
         else
         {
